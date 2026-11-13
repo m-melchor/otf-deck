@@ -146,6 +146,9 @@ body.on-dark{background:var(--deep)}
 .sva .label{margin-bottom:14px;display:block}
 .sva p{font-size:24px;line-height:1.45}
 .sva .job p{font-family:var(--serif);font-size:30px;line-height:1.3}
+.sva.one{grid-template-columns:1fr;margin-top:28px}
+.sva.one .job{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center}
+.sva.one .job .label{margin:0}
 
 /* topics */
 
@@ -479,8 +482,8 @@ body.full #bar{visibility:hidden}
   <div class="head"><span class="label" data-a>Part 2 · The problem</span></div>
   <p class="prob" data-a>We help boys in grades 3 to 8 who struggle with <mark>a lack of guidance</mark> by providing a tailored curriculum for basic life skills.</p>
   <div class="sva">
-    <div data-a><span class="label green">Who has this job to do</span><p><b>A counselor, teacher, youth pastor or coach</b> who works with boys in grades 3 to 8, mostly in lower-income communities, whose parents are stretched thin.</p></div>
-    <div class="job" data-a><span class="label green">The job to be done</span><p>“Help my boys handle everyday life on their own, without building a curriculum from scratch or finding hours I don’t have.”</p></div>
+    <div data-a><span class="label green">What’s missing</span><p><b>A busy home.</b> Their parents work hard and can’t always be there to teach everyday skills.</p></div>
+    <div data-a><span class="label green">What happens instead</span><p><b>They figure it out alone.</b> A video shows the steps, but no one checks their work or tells them when to stop and ask for help.</p></div>
   </div>
 </section>
 
@@ -493,8 +496,9 @@ body.full #bar{visibility:hidden}
     <div class="arrow" data-a="fade"><svg viewBox="0 0 46 20"><path d="M2 10h40M34 3l8 7-8 7"/></svg></div>
     <div class="node" data-a><span class="label">Runs it</span><h3>The adult they trust</h3><p>A counselor, teacher, youth pastor or coach. They pick the topics and keep the practice going after we leave.</p></div>
     <div class="arrow" data-a="fade"><svg viewBox="0 0 46 20"><path d="M2 10h40M34 3l8 7-8 7"/></svg></div>
-    <div class="node k" data-a><span class="label">Learns</span><h3>Boys in grades&nbsp;3&nbsp;to&nbsp;8</h3><p>Kids whose parents are working hard and can’t always be there to show them how.</p></div>
+    <div class="node k" data-a><span class="label">Learns</span><h3>Boys in grades&nbsp;3&nbsp;to&nbsp;8</h3><p>Hands-on practice with real tools, in small groups, with mentors helping.</p></div>
   </div>
+  <div class="sva one" data-a><div class="job"><span class="label green">The job to be done</span><p>“Help the boys I work with handle everyday life on their own, without building lessons from scratch or finding hours I don’t have.”</p></div></div>
 </section>
 
 <!-- 7 Market -->
@@ -536,7 +540,7 @@ body.full #bar{visibility:hidden}
     <div class="pc" style="background:var(--butter)" data-a><svg viewBox="0 0 48 48"><path d="M8 26h8l8 6h10a4 4 0 0 0 0-8h-6"/><path d="M8 38h26l10-8a3 3 0 0 0-4-4l-6 4"/><path d="M28 8a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/></svg><h3>Foundations and sponsors</h3><p>They can pay for schools that can’t, an idea Steven S. raised in our interviews.</p></div>
     <div class="pc" style="background:var(--peach)" data-a><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="16"/><path d="M8 24h32M24 8c6 5 6 27 0 32M24 8c-6 5-6 27 0 32"/></svg><h3>Community and athletic groups</h3><p>Coaches and leaders who reach boys after school.</p></div>
   </div>
-  <div class="runs" data-a><span class="label">How it runs today</span><b>GitHub Pages</b> hosts the site · <b>Formspree</b> collects sign-ups · <b>GoatCounter</b> counts visits · <b>Stripe</b> for payments next</div>
+  <div class="runs" data-a><span class="label">How it runs today</span><b>GitHub Pages</b> hosts the site · <b>Formspree</b> collects sign-ups · <b>GoatCounter</b> counts visits · <b>Stripe</b> will take payments</div>
 </section>
 
 <!-- 10 Competition -->
@@ -577,7 +581,7 @@ body.full #bar{visibility:hidden}
     <div class="side">
       <span class="label" data-a>Part 3 · MVP 1</span>
       <h2 data-a>The website, <em style="font-style:normal;color:var(--accent)">live.</em></h2>
-      <p data-a>Our first test. The real site groups used to join the interest list.</p>
+      <p data-a>Our first test: the real site, where groups joined the interest list.</p>
       <div class="tabs" role="radiogroup" aria-label="Site page" data-a>
         <button role="radio" aria-checked="true" data-h="home">Home</button>
         <button role="radio" aria-checked="false" data-h="activities">Free activities</button>
@@ -699,11 +703,11 @@ body.full #bar{visibility:hidden}
     <div class="lc ok" data-a><span class="label">Validated</span><h3>The need is real</h3><ul>
       <li>Boys feel the gap, and many won’t ask a busy parent.<small>Luis V., Jayden S.</small></li>
       <li>Videos alone don’t stick. A real person does.<small>Joseph P.</small></li>
-      <li>People play the free activities: 17 visits went to one.<small>GoatCounter</small></li>
+      <li>People play the free activities: 17 visits opened one.<small>GoatCounter</small></li>
     </ul></div>
     <div class="lc no" data-a><span class="label" style="color:var(--bad)">Not proven yet</span><h3>Paying for it</h3><ul>
       <li>9 real sign-ups from 110 visits is 8.2%, under our 10% goal.<small>GoatCounter and Formspree</small></li>
-      <li>That a school will pay $200 to $300 a session. Nothing is booking yet, and the site says so.</li>
+      <li>That a school will pay $200 to $300 for a workshop. No one has booked yet, and the site says so.</li>
       <li>How often a school would bring us back in a year.</li>
     </ul></div>
     <div class="lc ch" data-a><span class="label">What changed our plan</span><h3>Our own limits</h3><ul>
@@ -743,7 +747,7 @@ body.full #bar{visibility:hidden}
     <div class="hc new" data-a><span class="label">We add</span><h3>Monthly online plan</h3>
       <div class="prices"><div class="price">$9.99 <small>per teacher</small></div><div class="price">$19.99 <small>team of three</small></div></div>
       <ul><li>Online activities on the smartboard or student devices</li><li>Printable guides the school prints in-house</li><li>About $4 per student for the school year</li></ul>
-      <p class="foot">For teachers and volunteers who show proof. Low-income schools and groups go first.</p></div>
+      <p class="foot">For teachers and volunteers with a school ID or a letter from their group. Low-income schools and groups go first.</p></div>
   </div>
 </section>
 
