@@ -1,0 +1,978 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="only light">
+<title>Own Two Feet Final</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&family=Young+Serif&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F6F4EF;--paper:#FCFBF8;--surface:#FFFFFF;--surface-2:#EEEBE4;
+  --ink:#16211C;--ink-2:#56615B;--line:#E2DED5;
+  --sage:#D9E6D8;--mist:#DDE7F0;--sand:#F2E6D3;--butter:#F4EDCF;--peach:#F5E0D3;
+  --accent:#2F6450;--accent-soft:#D9E9DF;--bad:#A2412F;--deep:#16211C;
+  --r:18px;--r-lg:32px;
+  --shadow:0 1px 1px rgba(22,33,28,.04),0 16px 36px -22px rgba(22,33,28,.25);
+  --ease:cubic-bezier(.2,.75,.15,1);
+  --serif:"Young Serif",Georgia,serif;--sans:Geist,system-ui,sans-serif;--mono:"Geist Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+body{position:fixed;inset:0}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;line-height:1.05}
+.label{font-family:var(--mono);font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.label.green{color:var(--accent)}
+
+/* stage */
+#stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform-origin:0 0;}
+.slide{position:absolute;inset:0;padding:84px 112px 120px;opacity:0;visibility:hidden;transform:translateX(60px);transition:opacity .55s var(--ease),transform .8s var(--ease),visibility 0s .8s;display:flex;flex-direction:column}
+.slide.on{opacity:1;visibility:visible;transform:none;transition:opacity .55s var(--ease),transform .8s var(--ease),visibility 0s}
+.slide.past{transform:translateX(-60px)}
+.slide.dark{background:var(--deep);color:#fff}
+.slide.dark .label{color:#fff}
+.slide.green{background:var(--accent);color:#fff}
+.slide.green .label{color:#fff}
+.slide.sage{background:var(--sage)}
+.head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:28px}
+.title{font-size:76px;max-width:1200px}
+.title em{font-style:normal;color:var(--accent)}
+.dark .title em,.green .title em{color:#fff}
+.lede{font-size:26px;line-height:1.45;color:var(--ink-2);max-width:980px;margin-top:22px}
+.dark .lede,.green .lede{color:#fff}
+
+/* entrance */
+[data-a]{opacity:0}
+.slide.on [data-a]{animation:rise .9s var(--ease) both;animation-delay:calc(var(--d,0) * 110ms + 180ms)}
+.slide.on [data-a="pop"]{animation-name:pop}
+.slide.on [data-a="left"]{animation-name:fromLeft}
+.slide.on [data-a="fade"]{animation-name:fade}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.86)}to{opacity:1;transform:none}}
+@keyframes fromLeft{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.w{display:inline-block;clip-path:inset(-.2em -.15em -.3em -.15em)}
+.w>span{display:inline-block;transform:translateY(140%)}
+.slide.on .w>span{animation:wordUp 1.05s var(--ease) both;animation-delay:calc(var(--t,0) * 110ms + 160ms + var(--wi) * 46ms)}
+@keyframes wordUp{from{transform:translateY(140%)}to{transform:none}}
+
+/* chrome */
+#bar{position:fixed;left:0;right:0;bottom:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;z-index:5;pointer-events:none}
+#bar>*{pointer-events:auto}
+#prints{display:flex;align-items:center;gap:6px}
+#prints button{width:22px;height:22px;display:grid;place-items:center}
+#prints button:nth-child(even){transform:translateY(-5px)}
+#prints svg{width:16px;height:9px;transform:rotate(-90deg);fill:var(--line);transition:fill .3s}
+#prints button.done svg{fill:var(--ink-2)}
+#prints button.cur svg{fill:var(--accent)}
+body.on-dark #prints svg{fill:rgba(255,255,255,.35)}
+body.on-dark #prints button.done svg,body.on-dark #prints button.cur svg{fill:#fff}
+.nav{display:flex;gap:8px;align-items:center}
+.nav .num{font-family:var(--mono);font-size:13px;letter-spacing:.1em;margin-right:8px}
+.nav button{width:42px;height:42px;border:1.5px solid var(--ink);border-radius:12px;display:grid;place-items:center;transition:background .2s,color .2s}
+.nav button:hover{background:var(--ink);color:#fff}
+.nav svg{width:18px;height:18px}
+body.on-dark .nav button{border-color:#fff;color:#fff}
+body.on-dark .nav button:hover{background:#fff;color:var(--ink)}
+body.on-dark .nav .num{color:#fff}
+body.on-dark{background:var(--deep)}
+#rotate{display:none}
+@media (orientation:portrait) and (max-width:700px){
+  #rotate{display:block;position:fixed;left:16px;right:16px;top:calc(env(safe-area-inset-top) + 18px);text-align:center;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;z-index:6}
+  body.on-dark #rotate{color:#fff}
+  #prints{display:none}
+}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 26px;border-radius:14px;font-size:19px;font-weight:600;border:1.5px solid var(--ink);transition:transform .2s var(--ease),background .2s,color .2s}
+.btn svg{width:20px;height:20px}
+.btn.solid{background:var(--ink);color:#fff}
+.btn.green{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:scale(.97)}
+.dark .btn{border-color:#fff;color:#fff}
+.dark .btn.solid{background:#fff;color:var(--ink)}
+
+/* logo */
+.mark{display:block}
+
+/* title slide */
+.s-title{justify-content:center}
+.s-title .mark{position:absolute;right:84px;top:50%;width:400px;height:400px;margin-top:-250px}
+.slide.on .s-title-mark{animation:spinIn 1.4s var(--ease) both}
+@keyframes spinIn{from{opacity:0;transform:rotate(-120deg) scale(.6)}to{opacity:1;transform:none}}
+.big{font-size:132px;line-height:.95}
+.walk{position:absolute;left:0;right:0;bottom:120px;height:90px;pointer-events:none}
+.walk i{position:absolute;width:44px;height:22px;opacity:0;background:var(--accent);-webkit-mask:var(--print) center/contain no-repeat;mask:var(--print) center/contain no-repeat}
+.slide.on .walk i{animation:step 6s linear infinite;animation-delay:calc(var(--i) * .32s)}
+@keyframes step{0%{opacity:0}4%{opacity:.85}45%{opacity:.85}60%{opacity:0}100%{opacity:0}}
+.team{display:flex;gap:40px;margin-top:44px;font-size:22px}
+.team b{font-weight:600}
+.team span{color:var(--ink-2)}
+
+/* quote */
+.origin{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center;flex:1}
+.origin .title{font-size:84px;line-height:1.02}
+.origin .lede{font-size:24px;margin-top:28px;max-width:720px}
+.selftaught{background:var(--sand);border-radius:var(--r);padding:34px 38px 32px}
+.selftaught .kit{display:block;width:100%;height:auto;margin:24px 0 22px}
+.selftaught p{font-family:var(--serif);font-size:34px;line-height:1.2}
+.selftaught small{display:block;font-size:18px;color:var(--ink-2);margin-top:10px}
+.whynow{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:40px;background:var(--accent);color:#fff;border-radius:var(--r);padding:28px 38px;margin-top:28px}
+.whynow .label{color:#fff}
+.whynow p{font-size:22px;line-height:1.45}
+.whynow b{font-family:var(--serif);font-weight:400;font-size:40px;line-height:1.1}
+.dark .quote .who,.green .quote .who{color:#fff}
+
+/* interview quotes */
+.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:10px}
+.qc{border-radius:var(--r-lg);padding:34px 36px;display:flex;flex-direction:column;gap:18px}
+.qc p{font-family:var(--serif);font-size:30px;line-height:1.25}
+.qc span{font-size:18px;font-weight:500;margin-top:auto}
+.qc.c1{background:var(--sage)}.qc.c2{background:var(--mist)}.qc.c3{background:var(--sand)}
+.qc.c4{background:var(--surface);border:1.5px solid var(--ink)}
+.qc.c4 .label{color:var(--bad)}
+
+/* problem */
+.prob{font-family:var(--serif);font-size:72px;line-height:1.12;max-width:1300px}
+.prob mark{background:none;color:var(--accent);position:relative}
+.prob mark::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:6px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .9s var(--ease) 1.1s}
+.slide.on .prob mark::after{transform:scaleX(1)}
+.sva{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:auto}
+.sva div{background:var(--surface);border-radius:var(--r-lg);padding:30px 34px;box-shadow:var(--shadow)}
+.sva .label{margin-bottom:14px;display:block}
+.sva p{font-size:24px;line-height:1.45}
+.sva .job p{font-family:var(--serif);font-size:30px;line-height:1.3}
+
+/* topics */
+
+/* chain */
+.chain{display:grid;grid-template-columns:1fr 70px 1fr 70px 1fr;align-items:stretch;margin-top:20px}
+.chain .node{background:var(--surface);border-radius:var(--r-lg);padding:34px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px}
+.chain .node.k{background:var(--accent);color:#fff}
+.chain .node.k .label{color:#fff}
+.chain h3{font-size:40px}
+.chain p{font-size:20px;line-height:1.5}
+.chain .node:not(.k) p{color:var(--ink-2)}
+.payers{list-style:none;font-size:20px;line-height:1.3}
+.payers li{padding:9px 0;border-top:1px solid var(--line)}
+.payers li:last-child{border-bottom:1px solid var(--line)}
+.arrow{display:grid;place-items:center}
+.arrow svg{width:46px;height:20px;stroke:var(--ink);stroke-width:2;fill:none;stroke-dasharray:60;stroke-dashoffset:60}
+.slide.on .arrow svg{animation:draw .8s var(--ease) forwards;animation-delay:calc(var(--d,0) * 110ms + 500ms)}
+@keyframes draw{to{stroke-dashoffset:0}}
+.persona{margin-top:auto;display:flex;gap:26px;align-items:center;font-size:22px;line-height:1.5}
+.persona b{font-weight:600}
+
+/* market */
+.mkt{display:grid;grid-template-columns:600px 1fr;gap:70px;align-items:center;flex:1}
+.rings{position:relative;width:600px;height:600px}
+.rings div{position:absolute;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);display:flex;justify-content:center;padding-top:28px;font-family:var(--mono);font-size:15px;letter-spacing:.14em}
+.slide.on .rings div{animation:ring 1s var(--ease) forwards;animation-delay:calc(var(--i) * .35s + .3s)}
+@keyframes ring{to{transform:translate(-50%,-50%) scale(1)}}
+.rings .r1{width:600px;height:600px;background:var(--sage)}
+.rings .r2{width:380px;height:380px;background:var(--accent-soft);border:2px solid var(--accent);padding-top:24px}
+.rings .r3{width:150px;height:150px;background:var(--accent);color:#fff;align-items:center;padding:0}
+.mrows{display:flex;flex-direction:column;gap:20px}
+.mrow{display:grid;grid-template-columns:110px 1fr auto;gap:22px;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:18px}
+.mrow .k{font-family:var(--mono);font-size:18px;letter-spacing:.12em;color:var(--accent)}
+.mrow h3{font-size:46px}
+.mrow p{font-size:19px;color:var(--ink-2);margin-top:6px;line-height:1.4}
+.mrow .usd{font-family:var(--serif);font-size:40px;text-align:right}
+.mrow .usd small{display:block;font-family:var(--sans);font-size:15px;color:var(--ink-2)}
+.src{font-size:15px;color:var(--ink-2);margin-top:14px;line-height:1.5}
+
+/* revenue */
+.rev{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:20px;position:relative}
+.rev .line{position:absolute;left:4%;right:4%;top:22px;height:2px;background:var(--ink);transform:scaleX(0);transform-origin:left}
+.slide.on .rev .line{transition:transform 1.6s var(--ease) .4s;transform:scaleX(1)}
+.stage-c{position:relative;padding-top:58px}
+.stage-c::before{content:"";position:absolute;left:0;top:12px;width:22px;height:22px;border-radius:50%;background:var(--bg);border:2px solid var(--ink)}
+.stage-c.now::before{background:var(--accent);border-color:var(--accent)}
+.stage-c .card{background:var(--surface);border-radius:var(--r-lg);padding:30px;box-shadow:var(--shadow);height:100%}
+.stage-c.now .card{background:var(--ink);color:#fff}
+.stage-c.now .card .label{color:#fff}
+.stage-c h3{font-size:34px;margin:12px 0 14px}
+.price{font-family:var(--serif);font-size:56px;line-height:1}
+.price small{font-family:var(--sans);font-size:18px;margin-left:6px}
+.stage-c p{font-size:19px;line-height:1.5;margin-top:14px}
+.stage-c:not(.now) p{color:var(--ink-2)}
+.fee{margin-top:auto;font-size:20px;display:flex;gap:30px}
+.fee b{font-weight:600}
+
+/* partners */
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:10px}
+.pc{border-radius:var(--r-lg);padding:32px;display:flex;flex-direction:column;gap:14px;min-height:400px}
+.pc svg{width:60px;height:60px;stroke:var(--ink);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.pc h3{font-size:31px;margin-top:auto}
+.pc p{font-size:19px;line-height:1.5;color:var(--ink-2)}
+.runs{margin-top:auto;display:flex;gap:16px;align-items:center;font-size:19px;flex-wrap:wrap}
+.runs b{font-weight:600}
+.runs .label{margin-right:8px}
+
+/* competition */
+.spec{position:relative;height:420px;margin-top:10px}
+.spec .axis{position:absolute;left:0;right:0;top:210px;height:2px;background:var(--ink);transform:scaleX(0);transform-origin:left}
+.slide.on .spec .axis{transition:transform 1.4s var(--ease) .2s;transform:scaleX(1)}
+.spec .ends{position:absolute;left:0;right:0;top:226px;display:flex;justify-content:space-between}
+.comp{position:absolute;width:250px;transform:translateX(-50%)}
+.comp.up{bottom:224px}.comp.down{top:248px}
+.comp .card{background:var(--surface);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow)}
+.comp h3{font-family:var(--sans);font-weight:600;font-size:20px;line-height:1.25}
+.comp p{font-size:16px;color:var(--ink-2);margin-top:6px;line-height:1.4}
+.comp::after{content:"";position:absolute;left:50%;width:12px;height:12px;border-radius:50%;background:var(--ink);transform:translateX(-50%)}
+.comp.up::after{bottom:-21px}.comp.down::after{top:-44px}
+.comp.us .card{background:var(--accent);color:#fff}
+.comp.us p{color:#fff}
+.comp.us::after{background:var(--accent);width:20px;height:20px}
+.comp.us.up::after{bottom:-25px}
+.diff{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:auto}
+.diff p{font-size:21px;line-height:1.45;border-left:3px solid var(--accent);padding-left:18px}
+.diff b{font-weight:600}
+
+/* tests */
+.tests{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;flex:1;margin-top:8px}
+.tc{background:var(--surface);border-radius:var(--r-lg);padding:32px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px}
+.tc .who{font-size:18px;color:var(--ink-2)}
+.tc h3{font-size:36px}
+.tc .q{font-family:var(--serif);font-size:25px;line-height:1.3}
+.tc .pass{margin-top:auto;border-top:1px solid var(--line);padding-top:16px;font-size:19px;line-height:1.5}
+.tc .pass .label{display:block;margin-bottom:6px;color:var(--accent)}
+.tc .n{font-family:var(--serif);font-size:70px;color:var(--accent);line-height:.8}
+
+/* demo frame */
+.demo{display:grid;grid-template-columns:1fr 1100px;gap:44px;flex:1;min-height:0}
+.demo .side{display:flex;flex-direction:column;gap:20px}
+.demo .side h2{font-size:58px}
+.demo .side p{font-size:21px;line-height:1.5;color:var(--ink-2)}
+.tabs{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.tabs button{text-align:left;font-size:19px;font-weight:500;height:58px;padding:0 20px;border-radius:12px;background:var(--surface);border:1.5px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;transition:border-color .2s,background .2s,color .2s}
+.tabs button:hover{border-color:var(--ink)}
+.tabs button[aria-checked="true"]{border-color:var(--ink);background:var(--ink);color:#fff}
+.tabs button span{font-size:15px;font-weight:500;color:var(--ink-2);white-space:nowrap;font-variant-numeric:tabular-nums}
+.tabs button[aria-checked="true"] span{color:#fff}
+.frame{border-radius:20px;background:var(--surface);box-shadow:0 30px 60px -30px rgba(22,33,28,.45),0 0 0 1.5px var(--ink);display:flex;flex-direction:column;overflow:hidden;align-self:start}
+.frame .top{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 10px 0 18px;border-bottom:1.5px solid var(--ink);background:var(--paper)}
+.frame .top .label{font-size:13px}
+.frame .top .brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:19px}
+.frame .top .brand svg{width:36px;height:36px}
+.frame .top .btn{height:34px;padding:0 14px;font-size:15px;border-radius:9px}
+.frame .top .btn svg{width:16px;height:16px}
+.frame .screen{width:1100px;height:619px;background:var(--bg);display:grid;place-items:center}
+.frame .screen .label{color:var(--ink-2)}
+
+/* live layer */
+#live{position:fixed;left:0;top:0;transform-origin:0 0;z-index:10;overflow:hidden;background:var(--bg);opacity:0;visibility:hidden;pointer-events:none}
+#live.show{opacity:1;visibility:visible;pointer-events:auto}
+#live.anim{transition:transform .75s var(--ease),border-radius .75s var(--ease),opacity .45s var(--ease)}
+#live iframe{width:100%;height:100%;border:0;display:block;background:var(--bg)}
+#back{position:fixed;left:18px;bottom:18px;z-index:11;display:none;align-items:center;gap:10px;height:52px;padding:0 22px;border-radius:14px;background:var(--ink);color:#fff;font-size:17px;font-weight:600;box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
+#back svg{width:18px;height:18px}
+body.full #back{display:flex}
+body.full #bar{visibility:hidden}
+
+/* activities */
+.acts{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;flex:1;margin-top:6px}
+.act{background:var(--surface);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;text-align:left;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.act:hover{transform:translateY(-6px);box-shadow:0 1px 1px rgba(22,33,28,.04),0 26px 46px -24px rgba(22,33,28,.4)}
+.act .art{display:block;height:210px;overflow:hidden}
+.act .art svg{width:100%;height:100%;display:block}
+.act .meta{padding:22px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.act h3{font-size:28px}
+.act p{font-size:18px;line-height:1.45;color:var(--ink-2)}
+.act .play{margin-top:auto;display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:17px;border:1.5px solid var(--ink);border-radius:11px;height:44px;padding:0 16px;align-self:flex-start}
+.act .play svg{width:16px;height:16px}
+.act:hover .play{background:var(--ink);color:#fff}
+
+/* built */
+.manbtns{display:flex;gap:12px;margin-top:26px;align-items:center}
+.manbtns .label{margin-right:8px}
+.manbtns .btn{height:48px;font-size:17px;padding:0 18px}
+
+/* flyer + script */
+.fs{display:grid;grid-template-columns:520px 1fr;gap:70px;flex:1;min-height:0}
+.flyer{width:520px;align-self:start;transform:rotate(-2.5deg);border-radius:10px;box-shadow:0 30px 60px -28px rgba(22,33,28,.55);margin-top:-10px}
+.slide.on .flyer{animation:flyIn 1.2s var(--ease) both .2s}
+@keyframes flyIn{from{opacity:0;transform:translateY(80px) rotate(-9deg)}to{opacity:1;transform:rotate(-2.5deg)}}
+.fs h2{font-size:54px}
+.fs .block{margin-top:18px}
+.fs .block p{font-size:20px;line-height:1.5;color:var(--ink-2);margin-top:8px}
+.segs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+.segs div{border-radius:16px;padding:20px 22px}
+.segs h3{font-size:24px}
+.segs p{font-size:16px;line-height:1.4;color:var(--ink-2);margin-top:6px}
+.scale{display:flex;gap:10px;margin-top:16px}
+.scale span{flex:1;border:1.5px solid var(--ink);border-radius:12px;padding:12px 14px;font-weight:600;font-size:17px;text-align:center}
+.scale span.y{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* results */
+.stat{background:var(--surface);border-radius:24px;padding:24px 28px;box-shadow:var(--shadow)}
+.stat .row{display:flex;justify-content:space-between;align-items:baseline}
+.stat .v{font-family:var(--serif);font-size:62px;line-height:1}
+.stat p{font-size:18px;color:var(--ink-2);margin-top:6px}
+.meter{height:12px;border-radius:6px;background:var(--surface-2);margin-top:16px;position:relative;overflow:visible}
+.meter i{position:absolute;left:0;top:0;bottom:0;border-radius:6px;background:var(--accent);width:0;transition:width 1.4s var(--ease) .5s}
+.meter b{position:absolute;top:-8px;bottom:-8px;width:2px;background:var(--ink)}
+.meter em{position:absolute;top:22px;font-style:normal;font-family:var(--mono);font-size:12px;letter-spacing:.1em;transform:translateX(-50%)}
+.web{display:grid;grid-template-columns:380px 1fr 1fr;gap:22px;flex:1;min-height:0;align-items:start}
+.web .col{display:flex;flex-direction:column;gap:18px}
+.web .stat{padding:22px 26px}
+.web .stat .v{font-size:56px}
+.web .bars .b{grid-template-columns:170px 1fr 40px;font-size:17px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:34px}
+.dc{border-radius:var(--r);padding:34px 42px 32px;display:flex;flex-direction:column}
+.dc.said{background:var(--sage)}
+.dc.did{background:var(--surface);border:1.5px solid var(--ink)}
+.dc .big{font-family:var(--serif);font-size:140px;line-height:.9;margin-top:18px;font-variant-numeric:lining-nums proportional-nums}
+.dc .big small{font-size:52px}
+.dc .sub{font-size:26px;margin-top:12px}
+.dc .meter{margin-top:22px;margin-bottom:34px}
+.dc .foot{margin-top:auto;padding-top:22px;border-top:1px solid rgba(22,33,28,.18)}
+.dc .foot q{display:block;font-family:var(--serif);font-size:28px;line-height:1.25;quotes:"“" "”"}
+.dc .foot small{display:block;font-size:16px;color:var(--ink-2);margin-top:8px}
+.dc .foot p{font-size:20px;line-height:1.4}
+.flynote{font-size:20px;margin-top:22px}
+.take{font-family:var(--serif);font-size:30px;margin-top:18px}
+.bars{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+.bars .b{display:grid;grid-template-columns:220px 1fr 50px;gap:14px;align-items:center;font-size:18px}
+.bars .t{height:14px;border-radius:7px;background:var(--surface-2);position:relative;overflow:hidden}
+.bars .t i{position:absolute;inset:0 auto 0 0;width:0;background:var(--accent);border-radius:7px;transition:width 1.2s var(--ease)}
+.bars .c{font-family:var(--mono);text-align:right}
+
+/* learned */
+.lrn{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;flex:1;margin-top:34px}
+.lc{border-radius:var(--r-lg);padding:30px;display:flex;flex-direction:column;gap:16px}
+.lc ul{list-style:none;display:flex;flex-direction:column;gap:16px}
+.lc li{font-size:20px;line-height:1.45;padding-left:30px;position:relative}
+.lc li::before{content:"";position:absolute;left:0;top:8px;width:16px;height:9px;background:currentColor;-webkit-mask:var(--print) center/contain no-repeat;mask:var(--print) center/contain no-repeat;transform:rotate(-90deg)}
+.lc li small{display:block;font-size:16px;color:var(--ink-2);margin-top:4px}
+.lc.ok{background:var(--sage)}.lc.no{background:var(--surface);border:1.5px solid var(--ink)}.lc.ch{background:var(--sand)}
+.lc h3{font-size:34px}
+
+/* decision */
+.ipa{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:30px}
+.ipa div{border:2px solid #fff;border-radius:var(--r-lg);height:340px;display:flex;flex-direction:column;justify-content:space-between;padding:32px 36px;position:relative;overflow:hidden}
+.ipa h3{font-size:68px;position:relative;z-index:1}
+.ipa p{font-size:19px;line-height:1.45;position:relative;z-index:1}
+.ipa .pick::before{content:"";position:absolute;inset:0;background:#fff;transform:scaleY(0);transform-origin:bottom;transition:transform .9s var(--ease) 1.2s}
+.slide.on .ipa .pick::before{transform:scaleY(1)}
+.ipa .pick h3,.ipa .pick p{transition:color .3s 1.5s}
+.slide.on .ipa .pick h3,.slide.on .ipa .pick p{color:var(--ink)}
+.ipa .pick .label{position:relative;z-index:1;transition:color .3s 1.5s}
+.slide.on .ipa .pick .label{color:var(--accent)}
+.ipa > div:not(.pick){transition:filter .7s var(--ease) 2s}
+.slide.on .ipa > div:not(.pick){filter:opacity(.38)}
+.because{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+.because p{font-size:21px;line-height:1.45;border-top:1.5px solid #fff;padding-top:16px}
+
+/* hybrid */
+.hyb{display:grid;grid-template-columns:1fr 1fr;gap:26px;flex:1;margin-top:4px}
+.hc{border-radius:var(--r-lg);padding:36px 38px;display:flex;flex-direction:column;gap:14px}
+.hc.keep{background:var(--surface);box-shadow:var(--shadow)}
+.hc.new{background:var(--accent);color:#fff}
+.hc.new .label{color:#fff}
+.hc h3{font-size:44px}
+.hc .prices{display:flex;gap:40px;margin:6px 0}
+.hc ul{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:6px}
+.hc li{font-size:21px;line-height:1.45;padding-left:28px;position:relative}
+.hc li::before{content:"";position:absolute;left:0;top:13px;width:14px;height:2px;background:currentColor}
+.hc .foot{margin-top:auto;font-size:18px;line-height:1.5;border-top:1px solid currentColor;padding-top:16px}
+
+/* closing */
+.s-end{align-items:center;justify-content:center;text-align:center}
+.s-end .mark{width:170px;height:170px;margin-bottom:30px}
+.next{display:flex;gap:18px;margin:34px 0 34px;text-align:left}
+.next div{background:var(--surface);border-radius:20px;padding:20px 24px;width:330px;box-shadow:var(--shadow)}
+.next .label{color:var(--accent);display:block;margin-bottom:8px}
+.next p{font-size:19px;line-height:1.45}
+
+@media (prefers-reduced-motion:reduce){
+  .slide,.slide.on{transition:opacity .2s}
+  .slide.on [data-a],.slide.on .flyer,.slide.on .s-title-mark{animation:fade .3s both!important}
+  .slide.on .walk i{animation:none;opacity:.5}
+  .w>span,.slide.on .w>span{animation:none;transform:none}
+  #live.anim{transition:opacity .2s}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="st" x1="0" x2="1"><stop offset="0" stop-color="#9AA3AC"/><stop offset=".5" stop-color="#D9DEE2"/><stop offset="1" stop-color="#A3ACB4"/></linearGradient>
+    <linearGradient id="wd" x1="0" x2="1"><stop offset="0" stop-color="#C39A70"/><stop offset=".5" stop-color="#DDBB92"/><stop offset="1" stop-color="#BF956A"/></linearGradient>
+  </defs>
+  <symbol id="t-hammer" viewBox="0 0 80 200"><rect x="34.5" y="40" width="11" height="150" rx="5.5" fill="url(#wd)"/><rect x="32" y="128" width="16" height="64" rx="8" fill="#2B3540"/><path d="M10 22h50a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H22C14 48 6 40 4 30c-.6-3 1.8-8 6-8z" fill="url(#st)"/><rect x="60" y="20" width="14" height="30" rx="4" fill="#A3ACB4"/></symbol>
+  <symbol id="t-phillips" viewBox="0 0 80 200"><rect x="26" y="10" width="28" height="76" rx="12" fill="#7FA893"/><rect x="33" y="84" width="14" height="10" rx="2" fill="#6B7680"/><rect x="37.5" y="92" width="5" height="84" fill="url(#st)"/><path d="M37.5 176h5l-2.5 15z" fill="#9AA3AC"/></symbol>
+  <symbol id="t-flat" viewBox="0 0 80 200"><rect x="26" y="10" width="28" height="76" rx="12" fill="#86A3BF"/><rect x="33" y="84" width="14" height="10" rx="2" fill="#6B7680"/><rect x="37.5" y="92" width="5" height="84" fill="url(#st)"/><path d="M36 176h8l1 13h-10z" fill="#9AA3AC"/></symbol>
+  <symbol id="t-wrench" viewBox="0 0 80 200"><path d="M22 18a22 22 0 0 0 6 40l4 6v114a8 8 0 0 0 16 0V64l4-6a22 22 0 0 0 6-40v22H46V14H34v26H22z" fill="url(#st)"/><circle cx="40" cy="176" r="4" fill="#6B7680"/></symbol>
+  <symbol id="t-tape" viewBox="0 0 80 200"><rect x="6" y="30" width="68" height="68" rx="18" fill="#E5C27E"/><circle cx="40" cy="64" r="15" fill="#2B3540"/><circle cx="40" cy="64" r="5" fill="#E5C27E"/><rect x="52" y="94" width="12" height="86" fill="#F0E2B6"/><path d="M52 104h6M52 114h4M52 124h6M52 134h4M52 144h6M52 154h4M52 164h6" stroke="#2B3540" stroke-width="1.4"/><rect x="49" y="178" width="18" height="6" rx="1.5" fill="#9AA3AC"/></symbol>
+  <symbol id="t-level" viewBox="0 0 80 200"><rect x="25" y="8" width="30" height="184" rx="6" fill="#8FB09B"/><rect x="30" y="86" width="20" height="28" rx="6" fill="#2B3540"/><rect x="33" y="91" width="14" height="18" rx="7" fill="#DDE9B0"/><circle cx="40" cy="100" r="4" fill="#fff"/><circle cx="40" cy="24" r="5.5" fill="#2B3540"/><circle cx="40" cy="176" r="5.5" fill="#2B3540"/></symbol>
+  <!-- Laundry Sort-Out: clothes (120 x 120) and baskets (140 x 110) -->
+  <symbol id="l-tshirt" viewBox="0 0 120 120"><path d="M40 16 22 26 6 52l18 10 8-10v52q0 4 4 4h48q4 0 4-4V52l8 10 18-10-16-26-18-10q-8 14-20 14T40 16z" fill="#fff" stroke="#B9B4A6" stroke-width="1.8" stroke-linejoin="round"/><path d="M40 16Q60 10 80 16Q72 30 60 30Q48 30 40 16z" fill="#E4E0D6"/><path d="M40 16Q48 30 60 30T80 16" fill="none" stroke="#D2CDC0" stroke-width="3" stroke-linecap="round"/><path d="M32 52q-2-22 8-36M88 52q2-22-8-36M33 99h54" fill="none" stroke="#DAD5C9" stroke-width="1.4"/><path d="M74 31q14 4 14 22v51q0 4-4 4H74z" fill="#16211C" opacity=".05"/></symbol>
+  <symbol id="l-jeans" viewBox="0 0 120 120"><path d="M34 10h52l6 98H64L60 46l-4 62H28z" fill="#2F4A68"/><path d="M60 46l4 62h28l-6-76q-12 18-26 14z" fill="#16211C" opacity=".14"/><path d="M40 58q-2 22-4 38" fill="none" stroke="#4F6F92" stroke-width="5" stroke-linecap="round" opacity=".55"/><path d="M34 10h52l.8 13H33.2z" fill="#243B54"/><rect x="39" y="9" width="4" height="16" rx="1.5" fill="#1D3149"/><rect x="77" y="9" width="4" height="16" rx="1.5" fill="#1D3149"/><circle cx="60" cy="16" r="2.4" fill="#C9D0D6"/><path d="M60 24v22M36 25q2 13 16 11M84 25q-2 13-16 11M30 101h25M65 101h25" fill="none" stroke="#7F9BB8" stroke-width="1.4" stroke-dasharray="3 2.5"/></symbol>
+  <symbol id="l-hoodie" viewBox="0 0 120 120"><path d="M42 24 22 34 8 78l18 6 8-20v42q0 4 4 4h44q4 0 4-4V64l8 20 18-6-14-44-20-10z" fill="#262B31"/><path d="M8 78l18 6-2.5 7-18-6zM112 78l-18 6 2.5 7 18-6z" fill="#1A1E23"/><rect x="34" y="102" width="52" height="8" rx="3" fill="#1A1E23"/><path d="M41 74h38l5 26H36z" fill="#2E343B" stroke="#3E464E" stroke-width="1.4" stroke-linejoin="round"/><path d="M42 24 34 64M78 24l8 40" fill="none" stroke="#3A4249" stroke-width="1.4"/><path d="M42 24Q40 6 60 6T78 24Q70 40 60 40T42 24z" fill="#333A41"/><path d="M49 24Q50 14 60 14T71 24Q66 34 60 34T49 24z" fill="#14171A"/><path d="M54 38v16M66 38v16" stroke="#C9CFD4" stroke-width="2" stroke-linecap="round"/><circle cx="54" cy="56" r="2.2" fill="#C9CFD4"/><circle cx="66" cy="56" r="2.2" fill="#C9CFD4"/></symbol>
+  <symbol id="l-socks" viewBox="0 0 120 120"><g transform="translate(36 4) scale(.8)"><path d="M24 10h28v52q0 7 8 10l24 9q14 6 8 18-5 8-16 7l-40-6q-12-2-12-14z" fill="#F1EEE6" stroke="#B9B4A6" stroke-width="2.2" stroke-linejoin="round"/><path d="M24 15h28M24 21h28" stroke="#9CB2C8" stroke-width="3"/></g><path d="M24 10h28v52q0 7 8 10l24 9q14 6 8 18-5 8-16 7l-40-6q-12-2-12-14z" fill="#fff" stroke="#B9B4A6" stroke-width="1.8" stroke-linejoin="round"/><path d="M24 10h28v12H24z" fill="#F0EDE4"/><path d="M24 15h28M24 21h28" stroke="#8FA7BF" stroke-width="2.6"/><path d="M44 24v38q0 7 8 10V24z" fill="#16211C" opacity=".05"/></symbol>
+  <symbol id="l-sweats" viewBox="0 0 120 120"><path d="M32 10H88L92 100q0 8-4 8H68q-4 0-4-8L60 50 56 100q0 8-4 8H32q-4 0-4-8z" fill="#555B62"/><path d="M60 50 64 100q0 8 4 8H88q4 0 4-8L88 10Q84 36 60 50z" fill="#16211C" opacity=".14"/><rect x="31" y="10" width="58" height="14" rx="3" fill="#41464D"/><path d="M60 24V50M36 26l-6 74M84 26l6 74" stroke="#444A51" stroke-width="1.4" fill="none"/><rect x="28" y="94" width="28" height="14" rx="4" fill="#41464D"/><rect x="64" y="94" width="28" height="14" rx="4" fill="#41464D"/><path d="M56 24q-2 12-6 17M64 24q2 12 6 17" stroke="#DADEE2" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="50" cy="43" r="2.3" fill="#DADEE2"/><circle cx="70" cy="43" r="2.3" fill="#DADEE2"/></symbol>
+  <symbol id="l-bath" viewBox="0 0 120 120"><rect x="16" y="96" width="88" height="8" rx="4" fill="#4D8593"/><rect x="12" y="24" width="96" height="76" rx="9" fill="#6FA8B6"/><rect x="12" y="24" width="96" height="15" rx="8" fill="#8CBFCB"/><path d="M12 39h96" stroke="#5A93A1" stroke-width="1.5"/><path d="M12 68h96v7H12zM12 79h96v3.5H12z" fill="#EAF3F5"/><path d="M92 39h16v50q0 11-9 11H92z" fill="#16211C" opacity=".07"/><rect x="12" y="24" width="96" height="76" rx="9" fill="none" stroke="#4D8593" stroke-width="1.4"/></symbol>
+  <symbol id="l-hand" viewBox="0 0 120 120"><path d="M54 18Q54 6 60 6T66 18" fill="none" stroke="#6E9C7D" stroke-width="3.2" stroke-linecap="round"/><path d="M36 100v7M44 100v7M52 100v7M60 100v7M68 100v7M76 100v7M84 100v7" stroke="#8DB89B" stroke-width="2.4" stroke-linecap="round"/><rect x="32" y="16" width="56" height="86" rx="7" fill="#8DB89B"/><rect x="32" y="16" width="56" height="12" rx="6" fill="#A6CDB1"/><path d="M32 28h56" stroke="#78A486" stroke-width="1.5"/><path d="M32 72h56v6H32zM32 82h56v3H32z" fill="#F0F6F1"/><path d="M76 28h12v68q0 6-7 6h-5z" fill="#16211C" opacity=".07"/><rect x="32" y="16" width="56" height="86" rx="7" fill="none" stroke="#6E9C7D" stroke-width="1.4"/></symbol>
+  <symbol id="l-jersey" viewBox="0 0 120 120"><path d="M40 16 22 26 6 52l18 10 8-10v52q0 4 4 4h48q4 0 4-4V52l8 10 18-10-16-26-18-10L60 40z" fill="#C8372D"/><path d="M74 33l14 12v59q0 4-4 4H74z" fill="#16211C" opacity=".1"/><path d="M40 16Q60 9 80 16L60 40z" fill="#8F2620"/><path d="M40 16 60 40 80 16" fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><path d="M10 44l16 9M110 44l-16 9M13 38l16 9M107 38l-16 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/><text x="60" y="86" text-anchor="middle" font-family="Young Serif,Georgia,serif" font-size="34" fill="#fff">7</text><path d="M68 28Q80 34 88 50" fill="none" stroke="#fff" stroke-width="1.6"/><g transform="translate(88 50) rotate(14)"><rect x="-8" y="0" width="16" height="22" rx="3" fill="#fff" stroke="#B9B4A6" stroke-width="1.2"/><circle cx="0" cy="4" r="1.6" fill="#B9B4A6"/><text x="0" y="16" text-anchor="middle" font-family="Geist,system-ui,sans-serif" font-size="6.5" font-weight="600" fill="#C8372D">NEW</text></g></symbol>
+  <symbol id="l-bk-dark" viewBox="0 0 140 110"><rect x="6" y="8" width="128" height="14" rx="7" fill="#262E36"/><path d="M14 22h112l-10 76q-1 6-7 6H31q-6 0-7-6z" fill="#3E4A56"/><g fill="#222A31"><rect x="24" y="34" width="12" height="9" rx="4.5"/><rect x="44" y="34" width="12" height="9" rx="4.5"/><rect x="64" y="34" width="12" height="9" rx="4.5"/><rect x="84" y="34" width="12" height="9" rx="4.5"/><rect x="104" y="34" width="12" height="9" rx="4.5"/><rect x="24" y="54" width="12" height="9" rx="4.5"/><rect x="44" y="54" width="12" height="9" rx="4.5"/><rect x="64" y="54" width="12" height="9" rx="4.5"/><rect x="84" y="54" width="12" height="9" rx="4.5"/><rect x="104" y="54" width="12" height="9" rx="4.5"/><rect x="31" y="74" width="12" height="9" rx="4.5"/><rect x="53" y="74" width="12" height="9" rx="4.5"/><rect x="75" y="74" width="12" height="9" rx="4.5"/><rect x="97" y="74" width="12" height="9" rx="4.5"/></g></symbol>
+  <symbol id="l-bk-light" viewBox="0 0 140 110"><rect x="6" y="8" width="128" height="14" rx="7" fill="#DDD7C8" stroke="#BDB7A8" stroke-width="1.4"/><path d="M14 22h112l-10 76q-1 6-7 6H31q-6 0-7-6z" fill="#F6F3EB" stroke="#BDB7A8" stroke-width="1.4" stroke-linejoin="round"/><g fill="#DAD4C5"><rect x="24" y="34" width="12" height="9" rx="4.5"/><rect x="44" y="34" width="12" height="9" rx="4.5"/><rect x="64" y="34" width="12" height="9" rx="4.5"/><rect x="84" y="34" width="12" height="9" rx="4.5"/><rect x="104" y="34" width="12" height="9" rx="4.5"/><rect x="24" y="54" width="12" height="9" rx="4.5"/><rect x="44" y="54" width="12" height="9" rx="4.5"/><rect x="64" y="54" width="12" height="9" rx="4.5"/><rect x="84" y="54" width="12" height="9" rx="4.5"/><rect x="104" y="54" width="12" height="9" rx="4.5"/><rect x="31" y="74" width="12" height="9" rx="4.5"/><rect x="53" y="74" width="12" height="9" rx="4.5"/><rect x="75" y="74" width="12" height="9" rx="4.5"/><rect x="97" y="74" width="12" height="9" rx="4.5"/></g></symbol>
+  <symbol id="l-bk-towel" viewBox="0 0 140 110"><rect x="6" y="8" width="128" height="14" rx="7" fill="#4D8593"/><path d="M14 22h112l-10 76q-1 6-7 6H31q-6 0-7-6z" fill="#6FA8B6"/><g fill="#52899A"><rect x="24" y="34" width="12" height="9" rx="4.5"/><rect x="44" y="34" width="12" height="9" rx="4.5"/><rect x="64" y="34" width="12" height="9" rx="4.5"/><rect x="84" y="34" width="12" height="9" rx="4.5"/><rect x="104" y="34" width="12" height="9" rx="4.5"/><rect x="24" y="54" width="12" height="9" rx="4.5"/><rect x="44" y="54" width="12" height="9" rx="4.5"/><rect x="64" y="54" width="12" height="9" rx="4.5"/><rect x="84" y="54" width="12" height="9" rx="4.5"/><rect x="104" y="54" width="12" height="9" rx="4.5"/><rect x="31" y="74" width="12" height="9" rx="4.5"/><rect x="53" y="74" width="12" height="9" rx="4.5"/><rect x="75" y="74" width="12" height="9" rx="4.5"/><rect x="97" y="74" width="12" height="9" rx="4.5"/></g></symbol>
+</svg>
+
+<div id="stage">
+
+<!-- 1 Title -->
+<section class="slide s-title" data-label="Title">
+  <svg class="mark s-title-mark" viewBox="0 0 220 220" aria-hidden="true"><defs><path id="aT" d="M30 110a80 80 0 0 1 160 0"/><path id="aB" d="M24 110a86 86 0 0 0 172 0"/></defs><circle cx="110" cy="110" r="106" fill="#D9E6D8"/><circle cx="110" cy="110" r="64" fill="#FFFFFF"/><text font-family="Geist, system-ui, sans-serif" font-size="17" font-weight="600" letter-spacing="5" fill="#16211C"><textPath href="#aT" startOffset="50%" text-anchor="middle">OWN TWO FEET</textPath></text><text font-family="Geist, system-ui, sans-serif" font-size="13" font-weight="500" letter-spacing="4" fill="#46504A"><textPath href="#aB" startOffset="50%" text-anchor="middle">LIFE SKILLS · HANDS ON</textPath></text><circle cx="40" cy="110" r="3" fill="#2F6450"/><circle cx="180" cy="110" r="3" fill="#2F6450"/><g transform="translate(70 64) scale(.82)"><g transform="translate(40 20) scale(-1 1)"><circle cx="24" cy="7" r="6" fill="#16211C"/><circle cx="33" cy="11.5" r="4" fill="#16211C"/><circle cx="38.5" cy="18" r="3.3" fill="#16211C"/><circle cx="41" cy="25" r="2.8" fill="#16211C"/><path d="M21 2C33 3 38 15 37 30C36 43 31 51 30 61C29 71 32 79 30 89C28 98 13 98 11 89C9 79 13 71 11 61C9 50 3 41 4 28C5 13 10 1 21 2Z" transform="translate(1 18) scale(.86)" fill="#16211C"/></g><g transform="translate(52 0)"><circle cx="24" cy="7" r="6" fill="#2F6450"/><circle cx="33" cy="11.5" r="4" fill="#2F6450"/><circle cx="38.5" cy="18" r="3.3" fill="#2F6450"/><circle cx="41" cy="25" r="2.8" fill="#2F6450"/><path d="M21 2C33 3 38 15 37 30C36 43 31 51 30 61C29 71 32 79 30 89C28 98 13 98 11 89C9 79 13 71 11 61C9 50 3 41 4 28C5 13 10 1 21 2Z" transform="translate(1 18) scale(.86)" fill="#2F6450"/></g></g></svg>
+  <span class="label green" data-a>ENT 3315 · Final venture story</span>
+  <h1 class="big" data-a style="margin-top:18px">Own Two Feet</h1>
+  <p class="lede" data-a style="font-size:30px">A young man’s guide to life skills, taught side by side.</p>
+  <div class="team" data-a><div><b>Marco Melchor</b></div><div><b>Jewell Smith</b></div><div><b>Dane Howard</b></div><span>Baylor University</span></div>
+  <div class="walk" aria-hidden="true"></div>
+</section>
+
+<!-- 2 Origin -->
+<section class="slide" data-label="Where it came from">
+  <div class="head"><span class="label" data-a>Part 1 · The idea</span><span class="label green" data-a>Why us, why now</span></div>
+  <div class="origin">
+    <div>
+      <h2 class="title" data-a>We know this gap <em>firsthand.</em></h2>
+      <p class="lede" data-a>We figured out a lot of everyday skills on our own. Not every kid has someone with the time to show them.</p>
+    </div>
+    <div class="selftaught" data-a>
+      <span class="label">So we taught ourselves</span>
+      <svg class="kit" viewBox="0 0 480 200" aria-hidden="true"><use href="#t-hammer" x="0" width="80" height="200"/><use href="#t-wrench" x="100" width="80" height="200"/><use href="#t-phillips" x="200" width="80" height="200"/><use href="#t-tape" x="300" width="80" height="200"/><use href="#t-level" x="400" width="80" height="200"/></svg>
+      <p>Phones, laptops, cars, painting, cabinets.</p>
+      <small>Hands-on, often alone, by trial and error.</small>
+    </div>
+  </div>
+  <div class="whynow" data-a>
+    <span class="label">Why now</span>
+    <p>Kids have more videos and AI than ever, but no one beside them.</p>
+    <b>Information is not guidance.</b>
+  </div>
+</section>
+
+<!-- 3 What we heard -->
+<section class="slide" data-label="What we heard">
+  <div class="head"><span class="label" data-a>Part 1 · What we heard in interviews</span></div>
+  <div class="qgrid">
+    <div class="qc c1" data-a><p>“I didn’t always want to ask for help because my parents were already busy. Sometimes I just figured things out so I could help my brothers.”</p><span>Luis V.</span></div>
+    <div class="qc c2" data-a><p>“Sometimes YouTube videos don’t explain it fully, and then you have to go to a totally different video; it’s not a relationship, and it’s really confusing.”</p><span>Joseph P.</span></div>
+    <div class="qc c3" data-a><p>“I was missing guidance in so many areas when I was that age; this would’ve been a huge help for me.”</p><span>Jayden S.</span></div>
+    <div class="qc c4" data-a><span class="label" style="margin-top:0">We heard the other side too</span><p>“If I need to learn something, I can ask my dad, search YouTube, or use ChatGPT. I don’t really see why I’d need another class for that.”</p><span>Samuel J.</span></div>
+  </div>
+</section>
+
+<!-- 4 Problem, SVA, JTBD -->
+<section class="slide" data-label="The problem">
+  <div class="head"><span class="label" data-a>Part 2 · The problem</span></div>
+  <p class="prob" data-a>We help boys in grades 3 to 8 who struggle with <mark>a lack of guidance</mark> by providing a tailored curriculum for basic life skills.</p>
+  <div class="sva">
+    <div data-a><span class="label green">Who we believe has the job</span><p><b>A counselor, teacher, youth pastor or coach</b> who works with boys in grades 3 to 8, mostly in lower-income communities, whose parents are stretched thin.</p></div>
+    <div class="job" data-a><span class="label green">The job to be done</span><p>“Help my boys handle everyday life on their own, without building a curriculum from scratch or finding hours I don’t have.”</p></div>
+  </div>
+</section>
+
+<!-- 6 Customer chain -->
+<section class="slide" data-label="Who it's for">
+  <div class="head"><span class="label" data-a>Part 2 · Who it’s for</span></div>
+  <h2 class="title" data-a>Who books it, who runs it,<br><em>and who learns.</em></h2>
+  <div class="chain" style="margin-top:40px">
+    <div class="node" data-a><span class="label">Books it</span><h3>The group</h3><ul class="payers"><li>Elementary and middle schools</li><li>Churches and youth groups</li><li>Social and athletic programs</li><li>Sponsors who cover a group</li></ul><p>Lower-income communities first.</p></div>
+    <div class="arrow" data-a="fade"><svg viewBox="0 0 46 20"><path d="M2 10h40M34 3l8 7-8 7"/></svg></div>
+    <div class="node" data-a><span class="label">Runs it</span><h3>The adult they trust</h3><p>A counselor, teacher, youth pastor or coach. They pick the topics and keep the practice going after we leave.</p></div>
+    <div class="arrow" data-a="fade"><svg viewBox="0 0 46 20"><path d="M2 10h40M34 3l8 7-8 7"/></svg></div>
+    <div class="node k" data-a><span class="label">Learns</span><h3>Boys in grades&nbsp;3&nbsp;to&nbsp;8</h3><p>Kids whose parents are working hard and can’t always be there to show them how.</p></div>
+  </div>
+</section>
+
+<!-- 7 Market -->
+<section class="slide" data-label="Market size">
+  <div class="head"><span class="label" data-a>Part 2 · Market size</span><span class="label green" data-a>Counted in schools</span></div>
+  <div class="mkt">
+    <div class="rings" aria-hidden="true"><div class="r1" style="--i:0">TAM</div><div class="r2" style="--i:1">SAM</div><div class="r3" style="--i:2">SOM</div></div>
+    <div>
+      <div class="mrows">
+        <div class="mrow" data-a><span class="k">TAM</span><div><h3><span data-count="67512">67,512</span> schools</h3><p>U.S. public elementary and middle schools</p></div><div class="usd">$23.6M<small>a year</small></div></div>
+        <div class="mrow" data-a><span class="k">SAM</span><div><h3><span data-count="6412">6,412</span> schools</h3><p>Texas public elementary and middle schools</p></div><div class="usd">$2.2M<small>a year</small></div></div>
+        <div class="mrow" data-a><span class="k">SOM</span><div><h3>10 schools</h3><p>Our year-one goal: Waco-area schools we can drive to</p></div><div class="usd">$8,400<small>a year</small></div></div>
+      </div>
+      <p class="src" data-a>Dollar math: one $350 workshop per school per year. SOM adds one teacher per school on the $49 membership for a 10-month school year ($490). Source: NCES Common Core of Data, 2023 to 2024, regular public schools by level.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8 Revenue -->
+<section class="slide" data-label="Revenue">
+  <div class="head"><span class="label" data-a>Part 2 · Revenue stream</span></div>
+  <h2 class="title" data-a>How we get paid<br><em>changed as we learned.</em></h2>
+  <div class="rev">
+    <div class="line"></div>
+    <div class="stage-c" data-a><div class="card"><span class="label">Part 1 idea</span><h3>A curriculum for staff</h3><div class="price">$250 to $400</div><p>Per school, per year. Staff teach it on their own.</p></div></div>
+    <div class="stage-c" data-a><div class="card"><span class="label">What we tested</span><h3>In-person workshops</h3><div class="price">$350 <small>50 min</small></div><div class="price" style="margin-top:8px">$500 <small>90 min</small></div><p>Up to 30 students. Supplies included.</p></div></div>
+    <div class="stage-c now" data-a><div class="card"><span class="label">Where we’re going</span><h3>Workshops plus a membership</h3><div class="price">$49 <small>a month, per teacher</small></div><p>Online activities, printable packs and maybe monthly hands-on kits, on top of workshops.</p></div></div>
+  </div>
+  <div class="fee" data-a style="margin-top:40px"><span>Card payments through Stripe: 2.9% plus 30¢, so we keep <b>$47.28</b> of every $49.</span><span>Bank transfer: 0.8%, capped at $5.</span></div>
+</section>
+
+<!-- 9 Partners -->
+<section class="slide" data-label="Key partners">
+  <div class="head"><span class="label" data-a>Part 2 · Key partnerships</span></div>
+  <h2 class="title" data-a>We can’t do this <em>alone.</em></h2>
+  <div class="pgrid" style="margin-top:40px">
+    <div class="pc" style="background:var(--sage)" data-a><svg viewBox="0 0 48 48"><path d="M6 20 24 8l18 12"/><path d="M10 18v22h28V18"/><path d="M20 40V28h8v12"/></svg><h3>Schools and counselors</h3><p>Our buyers and hosts. They know which boys need it most.</p></div>
+    <div class="pc" style="background:var(--mist)" data-a><svg viewBox="0 0 48 48"><path d="M24 4v10M19 9h10"/><path d="M12 22 24 14l12 8v20H12z"/><path d="M21 42v-9h6v9"/></svg><h3>Churches and youth groups</h3><p>Trusted places that already gather boys and families.</p></div>
+    <div class="pc" style="background:var(--butter)" data-a><svg viewBox="0 0 48 48"><path d="M8 26h8l8 6h10a4 4 0 0 0 0-8h-6"/><path d="M8 38h26l10-8a3 3 0 0 0-4-4l-6 4"/><path d="M28 8a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/></svg><h3>Foundations and sponsors</h3><p>They can pay for schools that can’t, an idea Steven S. raised in our interviews.</p></div>
+    <div class="pc" style="background:var(--peach)" data-a><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="16"/><path d="M8 24h32M24 8c6 5 6 27 0 32M24 8c-6 5-6 27 0 32"/></svg><h3>Community and athletic groups</h3><p>Coaches and leaders who reach boys after school.</p></div>
+  </div>
+  <div class="runs" data-a><span class="label">How it runs today</span><b>GitHub Pages</b> hosts the site · <b>Formspree</b> collects sign-ups · <b>GoatCounter</b> counts visits · <b>Stripe</b> for payments next</div>
+</section>
+
+<!-- 10 Competition -->
+<section class="slide" data-label="Competition">
+  <div class="head"><span class="label" data-a>Part 2 · Competition</span></div>
+  <h2 class="title" data-a>Most programs teach feelings. <em>We teach the tasks.</em></h2>
+  <div class="spec">
+    <div class="axis"></div>
+    <div class="ends"><span class="label">Feelings and behavior</span><span class="label">Everyday hands-on skills</span></div>
+    <div class="comp up" style="left:9%" data-a><div class="card"><h3>Positive Action</h3><p>$100 to $150 starter kits</p></div></div>
+    <div class="comp down" style="left:17%" data-a><div class="card"><h3>RULER</h3><p>$1,000 per school a year</p></div></div>
+    <div class="comp up" style="left:28%" data-a><div class="card"><h3>Botvin LifeSkills</h3><p>$265 to $645 per set</p></div></div>
+    <div class="comp down" style="left:45%" data-a><div class="card"><h3>Overcoming Obstacles</h3><p>Free, K to 12</p></div></div>
+    <div class="comp up" style="left:62%" data-a><div class="card"><h3>Texas Tech Today’s Life Skills</h3><p>$75, grades 7 to 12</p></div></div>
+    <div class="comp up us" style="left:89%" data-a="pop"><div class="card"><h3>Own Two Feet</h3><p>$350 workshop or $49 a month</p></div></div>
+  </div>
+  <div class="diff">
+    <p data-a><b>They hand teachers a binder.</b> We bring the tools and a mentor into the room.</p>
+    <p data-a><b>Lessons stop when class ends.</b> Our free activities keep practice going at home.</p>
+    <p data-a><b>Built for grades 3 to 8.</b> Short, real tasks: a screwdriver, a budget, a phone call.</p>
+  </div>
+</section>
+
+<!-- 11 What we set out to test -->
+<section class="slide" data-label="What we tested">
+  <div class="head"><span class="label" data-a>Part 3 · What we set out to test</span></div>
+  <h2 class="title" data-a style="margin-bottom:34px">Three tests, one question:<br><em>will they sign up?</em></h2>
+  <div class="tests">
+    <div class="tc" data-a><span class="n">1</span><h3>Website smoke test</h3><span class="who">Marco</span><p class="q">Will people who land on the site join the interest list?</p><div class="pass"><span class="label">Pass if</span>10% or more of visitors sign up, and at least 5 come from a school or youth group.</div></div>
+    <div class="tc" data-a><span class="n">2</span><h3>Flyer with a QR code</h3><span class="who">Dane</span><p class="q">Will counselors, admins and youth leaders for grades 3 to 8 scan and sign up at $350 or $500?</p><div class="pass"><span class="label">Pass if</span>Scans turn into sign-ups from the people the flyer was handed to.</div></div>
+    <div class="tc" data-a><span class="n">3</span><h3>Gatekeeper conversations</h3><span class="who">Jewell</span><p class="q">Who feels the pain most: schools, churches, or social and athletic groups?</p><div class="pass"><span class="label">Pass if</span>Schools get the most strong yes answers, as we expected.</div></div>
+  </div>
+</section>
+
+<!-- 12 Website live -->
+<section class="slide" data-label="MVP 1 · The website" id="sDemo">
+  <div class="demo">
+    <div class="side">
+      <span class="label" data-a>Part 3 · MVP 1</span>
+      <h2 data-a>The website, <em style="font-style:normal;color:var(--accent)">live.</em></h2>
+      <p data-a>Our first test. The real site groups used to join the interest list.</p>
+      <div class="tabs" role="radiogroup" aria-label="Site page" data-a>
+        <button role="radio" aria-checked="true" data-h="home">Home</button>
+        <button role="radio" aria-checked="false" data-h="activities">Free activities</button>
+        <button role="radio" aria-checked="false" data-h="workshops">Workshops <span>$350 · $500</span></button>
+        <button role="radio" aria-checked="false" data-h="story">Our story</button>
+      </div>
+      <button class="btn solid" id="goFull" data-a style="margin-top:auto;align-self:flex-start"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Full screen</button>
+    </div>
+    <div class="frame" data-a="pop">
+      <div class="top"><span class="brand"><svg viewBox="0 0 220 220" aria-hidden="true"><defs><path id="fT" d="M30 110a80 80 0 0 1 160 0"/><path id="fB" d="M24 110a86 86 0 0 0 172 0"/></defs><circle cx="110" cy="110" r="106" fill="#D9E6D8"/><circle cx="110" cy="110" r="64" fill="#FFFFFF"/><text font-family="Geist, system-ui, sans-serif" font-size="17" font-weight="600" letter-spacing="5" fill="#16211C"><textPath href="#fT" startOffset="50%" text-anchor="middle">OWN TWO FEET</textPath></text><text font-family="Geist, system-ui, sans-serif" font-size="13" font-weight="500" letter-spacing="4" fill="#46504A"><textPath href="#fB" startOffset="50%" text-anchor="middle">LIFE SKILLS · HANDS ON</textPath></text><circle cx="40" cy="110" r="3" fill="#2F6450"/><circle cx="180" cy="110" r="3" fill="#2F6450"/><g transform="translate(70 64) scale(.82)"><g transform="translate(40 20) scale(-1 1)"><circle cx="24" cy="7" r="6" fill="#16211C"/><circle cx="33" cy="11.5" r="4" fill="#16211C"/><circle cx="38.5" cy="18" r="3.3" fill="#16211C"/><circle cx="41" cy="25" r="2.8" fill="#16211C"/><path d="M21 2C33 3 38 15 37 30C36 43 31 51 30 61C29 71 32 79 30 89C28 98 13 98 11 89C9 79 13 71 11 61C9 50 3 41 4 28C5 13 10 1 21 2Z" transform="translate(1 18) scale(.86)" fill="#16211C"/></g><g transform="translate(52 0)"><circle cx="24" cy="7" r="6" fill="#2F6450"/><circle cx="33" cy="11.5" r="4" fill="#2F6450"/><circle cx="38.5" cy="18" r="3.3" fill="#2F6450"/><circle cx="41" cy="25" r="2.8" fill="#2F6450"/><path d="M21 2C33 3 38 15 37 30C36 43 31 51 30 61C29 71 32 79 30 89C28 98 13 98 11 89C9 79 13 71 11 61C9 50 3 41 4 28C5 13 10 1 21 2Z" transform="translate(1 18) scale(.86)" fill="#2F6450"/></g></g></svg>Own Two Feet</span><button class="btn" id="goFull2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Open</button></div>
+      <div class="screen" id="screen"><span class="label">Loading the live site</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 Activities -->
+<section class="slide" data-label="Free activities">
+  <div class="head"><span class="label" data-a>Part 3 · MVP 1 · Free activities</span><span class="label green" data-a>Tap one to play it live</span></div>
+  <h2 class="title" data-a style="margin-bottom:30px">Five activities anyone can try, <em>no sign-up.</em></h2>
+  <div class="acts">
+    <button class="act" data-h="tools" data-a><span class="art" style="background:radial-gradient(110% 80% at 50% 0%,#FBF8F2 0%,#ECE3D3 100%)"><svg viewBox="0 0 520 300" aria-hidden="true"><g transform="translate(40 10)"><use href="#t-hammer" width="90" height="270"/></g><g transform="translate(120 20)"><use href="#t-phillips" width="80" height="250"/></g><g transform="translate(195 10)"><use href="#t-tape" width="100" height="270"/></g><g transform="translate(285 15)"><use href="#t-wrench" width="80" height="260"/></g><g transform="translate(360 20)"><use href="#t-flat" width="80" height="250"/></g><g transform="translate(430 5)"><use href="#t-level" width="80" height="285"/></g></svg></span><span class="meta"><h3>Tool Time</h3><p>Pick the right tool on a 3D bench, then use a tape and a level.</p><span class="play">Play live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></button>
+    <button class="act" data-h="budget" data-a><span class="art" style="background:var(--butter)"><svg viewBox="0 0 300 220" aria-hidden="true"><rect x="40" y="40" width="220" height="140" rx="22" fill="#fff"/><text x="64" y="90" font-family="Geist,system-ui,sans-serif" font-size="13" fill="#8A928D">Left to spend</text><text x="64" y="134" font-family="Young Serif,Georgia,serif" font-size="42" fill="#16211C">$6</text><rect x="64" y="150" width="172" height="10" rx="5" fill="#EEEBE4"/><rect x="64" y="150" width="130" height="10" rx="5" fill="#2F6450"/></svg></span><span class="meta"><h3>Saturday on $25</h3><p>Cover needs, keep a promise, stay on budget when curveballs hit.</p><span class="play">Play live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></button>
+    <button class="act" data-h="scams" data-a><span class="art" style="background:var(--sage)"><svg viewBox="0 0 300 220" aria-hidden="true"><rect x="70" y="24" width="160" height="180" rx="28" fill="#fff"/><rect x="88" y="56" width="110" height="34" rx="16" fill="#F6F4EF"/><rect x="88" y="100" width="124" height="44" rx="16" fill="#F2E2A6"/><rect x="100" y="114" width="70" height="6" rx="3" fill="#16211C" opacity=".5"/><rect x="100" y="126" width="90" height="6" rx="3" fill="#16211C" opacity=".3"/><rect x="88" y="156" width="80" height="26" rx="13" fill="#F6F4EF"/></svg></span><span class="meta"><h3>Scam or Safe?</h3><p>Read six messages and tap the red flags that give a scam away.</p><span class="play">Play live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></button>
+    <button class="act" data-h="call" data-a><span class="art" style="background:var(--mist)"><svg viewBox="0 0 300 220" aria-hidden="true"><rect x="70" y="24" width="160" height="180" rx="28" fill="#fff"/><circle cx="150" cy="70" r="20" fill="#F6F4EF"/><text x="150" y="76" text-anchor="middle" font-family="Geist,system-ui,sans-serif" font-size="15" font-weight="600" fill="#56615B">FC</text><text x="150" y="116" text-anchor="middle" font-family="Geist,system-ui,sans-serif" font-size="15" font-weight="600" fill="#16211C">Fresh Cuts</text><text x="150" y="136" text-anchor="middle" font-family="Geist Mono,monospace" font-size="12" fill="#5F6B64">1:12</text><circle cx="150" cy="172" r="15" fill="#2F6450"/><path d="M143 172h14" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="meta"><h3>Make the Call</h3><p>Call a front desk and move an appointment. Three real scenarios.</p><span class="play">Play live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></button>
+    <button class="act" data-h="laundry" data-a><span class="art" style="background:var(--sand)"><svg viewBox="0 0 300 220" aria-hidden="true"><use href="#l-tshirt" x="18" y="14" width="88" height="88"/><use href="#l-jeans" x="106" y="14" width="88" height="88"/><use href="#l-bath" x="194" y="14" width="88" height="88"/><use href="#l-bk-light" x="20" y="116" width="84" height="66"/><use href="#l-bk-dark" x="108" y="116" width="84" height="66"/><use href="#l-bk-towel" x="196" y="116" width="84" height="66"/></svg></span><span class="meta"><h3>Laundry Sort-Out</h3><p>Sort a pile into darks, lights and towels, then read care labels.</p><span class="play">Play live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></button>
+  </div>
+  <div class="manbtns" data-a><span class="label">Plus 7 free manuals, in English and Spanish</span>
+    <button class="btn" data-m="manuals/money.html">Money</button>
+    <button class="btn" data-m="manuals/home-tools.html">Home &amp; tools</button>
+    <button class="btn" data-m="manuals/tech.html">Tech</button>
+    <button class="btn" data-m="es.html">En español</button>
+  </div>
+</section>
+
+<!-- 15 Flyer + conversations -->
+<section class="slide" data-label="MVP 2 and 3">
+  <div class="fs">
+    <img class="flyer" src="flyer.png" alt="The Own Two Feet flyer: planned workshops for grades 3 to 8, eight topics, $350 and $500 prices, and a QR code to join the interest list">
+    <div>
+      <span class="label" data-a>Part 3 · MVP 2 and MVP 3</span>
+      <h2 data-a style="margin-top:16px">A flyer in hand. <em style="font-style:normal;color:var(--accent)">A real conversation.</em></h2>
+      <div class="block" data-a><span class="label green">MVP 2 · Dane · Flyer</span><p>Handed to counselors, admins and youth leaders. Real prices on the page, and one QR code to the interest list.</p></div>
+      <div class="block" data-a><span class="label green">MVP 3 · Jewell · Conversation script</span><p>The same questions with gatekeepers in three groups, scored the same way every time.</p></div>
+      <div class="segs">
+        <div style="background:var(--sage)" data-a><h3>Schools</h3><p>Counselors, teachers, admins</p></div>
+        <div style="background:var(--mist)" data-a><h3>Churches</h3><p>Youth pastors and leaders</p></div>
+        <div style="background:var(--sand)" data-a><h3>Groups</h3><p>Social and athletic programs</p></div>
+      </div>
+      <div class="scale" data-a><span class="y">Strong yes</span><span>Medium yes</span><span>No</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 Website results (GoatCounter, Oct 18 to Nov 11 2026) -->
+<section class="slide" data-label="Website results">
+  <div class="head"><span class="label" data-a>Part 4 · MVP 1 results · The website</span><span class="label green" data-a>Oct 18 to Nov 11 · 25 days</span></div>
+  <h2 class="title" data-a>Lots of looking and playing.<br><em>Few sign-ups.</em></h2>
+  <div class="web" style="margin-top:30px">
+    <div class="col">
+      <div class="stat" data-a><div class="row"><span class="label">Visits</span><span class="v" data-count="86">86</span></div><p>Counted by GoatCounter, no cookies</p></div>
+      <div class="stat" data-a><div class="row"><span class="label">Real sign-ups</span><span class="v">4 <small style="font-size:26px">4.7%</small></span></div><p>Below our 10% goal</p><div class="meter"><i data-w="23.3"></i><b style="left:50%"></b><em style="left:50%">10% goal</em></div></div>
+      <div class="stat" data-a><div class="row"><span class="label">Activity visits</span><span class="v" data-count="17">17</span></div><p>Make the Call, Laundry, Saturday on $25, Tool Time</p></div>
+    </div>
+    <div class="stat" data-a><span class="label">Where they went</span><div class="bars">
+      <div class="b"><span>Home</span><span class="t"><i data-w="100"></i></span><span class="c">35</span></div>
+      <div class="b"><span>Free activities</span><span class="t"><i data-w="25.7"></i></span><span class="c">9</span></div>
+      <div class="b"><span>Our story</span><span class="t"><i data-w="22.9"></i></span><span class="c">8</span></div>
+      <div class="b"><span>Workshops</span><span class="t"><i data-w="22.9"></i></span><span class="c">8</span></div>
+      <div class="b"><span>Make the Call</span><span class="t"><i data-w="14.3"></i></span><span class="c">5</span></div>
+      <div class="b"><span>Laundry Sort-Out</span><span class="t"><i data-w="14.3"></i></span><span class="c">5</span></div>
+      <div class="b"><span>Saturday on $25</span><span class="t"><i data-w="11.4"></i></span><span class="c">4</span></div>
+      <div class="b"><span>Tool Time</span><span class="t"><i data-w="8.6"></i></span><span class="c">3</span></div>
+      <div class="b"><span>Get involved</span><span class="t"><i data-w="8.6"></i></span><span class="c">3</span></div>
+    </div></div>
+    <div class="col">
+      <div class="stat" data-a><span class="label">How they found us</span><div class="bars">
+        <div class="b"><span>Text, QR or typed</span><span class="t"><i data-w="100"></i></span><span class="c">60</span></div>
+        <div class="b"><span>Instagram</span><span class="t"><i data-w="13.3"></i></span><span class="c">8</span></div>
+        <div class="b"><span>Facebook</span><span class="t"><i data-w="1.7"></i></span><span class="c">1</span></div>
+      </div></div>
+      <div class="stat" data-a><span class="label">What they used</span><div class="bars">
+        <div class="b"><span>Computer</span><span class="t"><i data-w="100"></i></span><span class="c">44</span></div>
+        <div class="b"><span>Phone</span><span class="t"><i data-w="90.9"></i></span><span class="c">40</span></div>
+        <div class="b"><span>Tablet</span><span class="t"><i data-w="2.3"></i></span><span class="c">1</span></div>
+      </div></div>
+    </div>
+  </div>
+  
+</section>
+
+<!-- 17 Other results -->
+<section class="slide" data-label="Conversations and sign-ups">
+  <div class="head"><span class="label" data-a>Part 4 · What people said, and what they did</span></div>
+  <h2 class="title" data-a>Almost everyone agreed.<br><em>Four signed up.</em></h2>
+  <div class="duo">
+    <div class="dc said" data-a>
+      <span class="label">In 15 conversations</span>
+      <div class="big"><span data-count="14">14</span><small> of 15</small></div>
+      <p class="sub">saw the gap we described.</p>
+      <div class="foot"><q>Schools, churches and foundations pay, not the kids.</q><small>Steven S., one of our interviews</small></div>
+    </div>
+    <div class="dc did" data-a>
+      <span class="label">Real sign-ups</span>
+      <div class="big"><span data-count="4">4</span></div>
+      <p class="sub">Our goal was 5.</p>
+      <div class="meter"><i data-w="64"></i><b style="left:80%"></b><em style="left:80%">Goal 5</em></div>
+      <div class="foot"><p>Three came through the site form, each a school or youth program asking for workshops. One came in before the form was set up.</p></div>
+    </div>
+  </div>
+  <p class="flynote" data-a><b>The flyer:</b> no visit came in tagged to it, so its scans are mixed in with other visits. We can’t prove it worked.</p>
+</section>
+
+<!-- 17 Learned -->
+<section class="slide" data-label="What we learned">
+  <div class="head"><span class="label" data-a>Part 4 · What we learned</span></div>
+  <h2 class="title" data-a>What we proved,<br><em>and what we didn’t.</em></h2>
+  <div class="lrn">
+    <div class="lc ok" data-a><span class="label">Validated</span><h3>The need is real</h3><ul>
+      <li>Boys feel the gap, and many won’t ask a busy parent.<small>Luis V., Jayden S.</small></li>
+      <li>Videos alone don’t stick. A real person does.<small>Joseph P.</small></li>
+      <li>People play the free activities: 17 visits went to one.<small>GoatCounter</small></li>
+    </ul></div>
+    <div class="lc no" data-a><span class="label" style="color:var(--bad)">Not proven yet</span><h3>Paying for it</h3><ul>
+      <li>4 real sign-ups from 86 visits is 4.7%, under our 10% goal.<small>GoatCounter and Formspree, Oct 18 to Nov 11</small></li>
+      <li>That a school will pay $350 to $500 a session. Nothing is booking yet, and the site says so.</li>
+      <li>How often a school would bring us back in a year.</li>
+    </ul></div>
+    <div class="lc ch" data-a><span class="label">What changed our plan</span><h3>Our own limits</h3><ul>
+      <li>Our team can’t be in schools every week. Workshops alone don’t scale with a team of three college students.</li>
+      <li>Some kids already have a dad, YouTube or ChatGPT to ask. The in-person part has to earn its price.<small>Samuel J.</small></li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- 18 Decision -->
+<section class="slide dark" data-label="Our decision">
+  <div class="head"><span class="label" data-a>Part 5 · Our decision</span></div>
+  <h2 class="title" data-a>We’re going to <em>pivot.</em></h2>
+  <div class="ipa">
+    <div data-a><span class="label">Not this</span><h3>Iterate</h3><p>Keep only workshops and tweak them. Still needs us in the room every week.</p></div>
+    <div class="pick" data-a><span class="label">Our call</span><h3>Pivot</h3><p>Keep workshops and add a classroom membership teachers run on their own.</p></div>
+    <div data-a><span class="label">Not this</span><h3>Abandon</h3><p>The need is real. Our interviews show it’s worth solving.</p></div>
+  </div>
+  <span class="label" data-a style="margin-top:64px;display:block">Why the pivot works</span>
+  <div class="because" style="margin-top:18px">
+    <p data-a>Teachers can use it every week, with or without us there.</p>
+    <p data-a>The free activities and manuals we built become the paid product.</p>
+    <p data-a>Workshops stay as the big hands-on day that makes it stick.</p>
+  </div>
+</section>
+
+<!-- 19 Hybrid -->
+<section class="slide" data-label="The hybrid">
+  <div class="head"><span class="label" data-a>Part 5 · The pivot</span></div>
+  <h2 class="title" data-a style="margin-bottom:34px">In person when it counts.<br><em>In class every week.</em></h2>
+  <div class="hyb">
+    <div class="hc keep" data-a><span class="label">We keep</span><h3>In-person workshops</h3>
+      <div class="prices"><div class="price">$350 <small>50 min</small></div><div class="price">$500 <small>90 min</small></div></div>
+      <ul><li>Up to 30 students, supplies included</li><li>Real tools, a mentor in the room</li><li>The kickoff that gets a class excited</li></ul>
+      <p class="foot">Booked per session by the school, church or sponsor.</p></div>
+    <div class="hc new" data-a><span class="label">We add</span><h3>Classroom membership</h3>
+      <div class="prices"><div class="price">$49 <small>a month, per teacher</small></div></div>
+      <ul><li>Online activities on the smartboard or student devices</li><li>Printable packs the school prints in-house</li><li>Maybe a monthly hands-on kit, once we test it</li></ul>
+      <p class="foot">Priced per classroom, so one teacher can start without a district contract.</p></div>
+  </div>
+</section>
+
+<!-- 20 Close -->
+<section class="slide s-end" data-label="Thank you">
+  <svg class="mark" viewBox="0 0 220 220" aria-hidden="true" data-a="pop"><defs><path id="bT" d="M30 110a80 80 0 0 1 160 0"/><path id="bB" d="M24 110a86 86 0 0 0 172 0"/></defs><circle cx="110" cy="110" r="106" fill="#D9E6D8"/><circle cx="110" cy="110" r="64" fill="#FFFFFF"/><text font-family="Geist, system-ui, sans-serif" font-size="17" font-weight="600" letter-spacing="5" fill="#16211C"><textPath href="#bT" startOffset="50%" text-anchor="middle">OWN TWO FEET</textPath></text><text font-family="Geist, system-ui, sans-serif" font-size="13" font-weight="500" letter-spacing="4" fill="#46504A"><textPath href="#bB" startOffset="50%" text-anchor="middle">LIFE SKILLS · HANDS ON</textPath></text><circle cx="40" cy="110" r="3" fill="#2F6450"/><circle cx="180" cy="110" r="3" fill="#2F6450"/><g transform="translate(70 64) scale(.82)"><g transform="translate(40 20) scale(-1 1)"><circle cx="24" cy="7" r="6" fill="#16211C"/><circle cx="33" cy="11.5" r="4" fill="#16211C"/><circle cx="38.5" cy="18" r="3.3" fill="#16211C"/><circle cx="41" cy="25" r="2.8" fill="#16211C"/><path d="M21 2C33 3 38 15 37 30C36 43 31 51 30 61C29 71 32 79 30 89C28 98 13 98 11 89C9 79 13 71 11 61C9 50 3 41 4 28C5 13 10 1 21 2Z" transform="translate(1 18) scale(.86)" fill="#16211C"/></g><g transform="translate(52 0)"><circle cx="24" cy="7" r="6" fill="#2F6450"/><circle cx="33" cy="11.5" r="4" fill="#2F6450"/><circle cx="38.5" cy="18" r="3.3" fill="#2F6450"/><circle cx="41" cy="25" r="2.8" fill="#2F6450"/><path d="M21 2C33 3 38 15 37 30C36 43 31 51 30 61C29 71 32 79 30 89C28 98 13 98 11 89C9 79 13 71 11 61C9 50 3 41 4 28C5 13 10 1 21 2Z" transform="translate(1 18) scale(.86)" fill="#2F6450"/></g></g></svg>
+  <h2 class="big" data-a style="font-size:110px">Thank you.</h2>
+  <div class="next">
+    <div data-a><span class="label">Next 1</span><p>Read the “Best fit” answers to pick the first membership piece.</p></div>
+    <div data-a><span class="label">Next 2</span><p>Pilot the membership with teachers already on our list.</p></div>
+    <div data-a><span class="label">Next 3</span><p>Book our first Waco-area workshops and turn on payments.</p></div>
+  </div>
+  <button class="btn solid" id="endLive" data-a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Visit Own Two Feet</button>
+</section>
+
+</div>
+
+<div id="live" aria-label="Own Two Feet website"><iframe id="site" title="Own Two Feet website" loading="eager"></iframe></div>
+<button id="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Back to slides</button>
+
+<div id="bar">
+  <div id="prints" aria-label="Slides"></div>
+  <div class="nav"><span class="num" id="num">1 / 20</span>
+    <button id="prev" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+    <button id="next" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </div>
+</div>
+<p id="rotate">Turn your phone sideways</p>
+
+<script>
+const SITE = 'https://m-melchor.github.io/owntwofeet/';
+const PRINT = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 16'%3E%3Cpath d='M1 8c0-3 2.5-4.6 5.5-4.4 2.4.2 4 .9 6.5.7C16.5 4 19 2 22.5 2 26 2 29 4.6 29 8s-3 6-6.5 6c-3.5 0-6-2-9.5-2.3-2.5-.2-4.1.5-6.5.7C3.5 12.6 1 11 1 8z'/%3E%3C/svg%3E\")";
+document.documentElement.style.setProperty('--print', PRINT);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const stage = document.getElementById('stage');
+const slides = [...document.querySelectorAll('.slide')];
+const N = slides.length;
+let cur = 0;
+
+/* stagger index for entrance */
+slides.forEach(s => s.querySelectorAll('[data-a]').forEach((el, i) => el.style.setProperty('--d', i)));
+
+/* titles rise in word by word, each word from behind its own mask */
+document.querySelectorAll('.title, h1.big').forEach(t => {
+  let wi = 0;
+  const wrap = node => [...node.childNodes].forEach(c => {
+    if (c.nodeType === 1) return wrap(c);
+    if (c.nodeType !== 3) return;
+    const frag = document.createDocumentFragment();
+    c.textContent.split(/(\s+)/).forEach(part => {
+      if (!part) return;
+      if (/^\s+$/.test(part)) return frag.append(part);
+      const w = document.createElement('span'); w.className = 'w';
+      const inner = document.createElement('span'); inner.textContent = part;
+      inner.style.setProperty('--wi', wi++);
+      w.append(inner); frag.append(w);
+    });
+    c.replaceWith(frag);
+  });
+  wrap(t);
+  t.style.setProperty('--t', t.style.getPropertyValue('--d') || 0);
+  t.removeAttribute('data-a');
+});
+
+/* walking footprints on title */
+(function(){
+  const w = document.querySelector('.walk');
+  for (let i = 0; i < 16; i++) {
+    const p = document.createElement('i');
+    const x = 4 + i * 6;
+    const up = i % 2 === 0;
+    p.style.left = x + '%';
+    p.style.top = (up ? 18 : 50) + 'px';
+    p.style.transform = 'rotate(' + (up ? -6 : 6) + 'deg)';
+    p.style.setProperty('--i', i);
+    w.appendChild(p);
+  }
+})();
+
+/* footprint progress */
+const prints = document.getElementById('prints');
+slides.forEach((s, i) => {
+  const b = document.createElement('button');
+  b.setAttribute('aria-label', (i + 1) + '. ' + s.dataset.label);
+  b.innerHTML = '<svg viewBox="0 0 32 16"><path d="M1 8c0-3 2.5-4.6 5.5-4.4 2.4.2 4 .9 6.5.7C16.5 4 19 2 22.5 2 26 2 29 4.6 29 8s-3 6-6.5 6c-3.5 0-6-2-9.5-2.3-2.5-.2-4.1.5-6.5.7C3.5 12.6 1 11 1 8z"/></svg>';
+  b.onclick = () => go(i);
+  prints.appendChild(b);
+});
+
+function fit(){
+  const s = Math.min(innerWidth / 1600, (innerHeight - 64) / 900);
+  stage.style.transform = 'translate(' + (-800 * s) + 'px,' + (-450 * s - 32) + 'px) scale(' + s + ')';
+  if (liveMode === 'dock') dock(false);
+}
+
+function countUp(root){
+  root.querySelectorAll('[data-count]').forEach(el => {
+    const end = +el.dataset.count;
+    if (reduce) { el.textContent = end.toLocaleString('en-US'); return; }
+    const t0 = performance.now(), dur = 1400;
+    const tick = t => {
+      const k = Math.min(1, (t - t0 - 300) / dur);
+      const e = k < 0 ? 0 : 1 - Math.pow(1 - k, 3);
+      el.textContent = Math.round(end * e).toLocaleString('en-US');
+      if (k < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  });
+}
+
+const demoIdx = slides.indexOf(document.getElementById('sDemo'));
+
+function go(i){
+  if (i < 0 || i >= N || i === cur && slides[i].classList.contains('on')) return;
+  if (liveMode === 'full') closeFull(true);
+  slides.forEach((s, k) => {
+    s.classList.toggle('on', k === i);
+    s.classList.toggle('past', k < i);
+  });
+  cur = i;
+  [...prints.children].forEach((b, k) => { b.classList.toggle('done', k < i); b.classList.toggle('cur', k === i); });
+  document.getElementById('num').textContent = (i + 1) + ' / ' + N;
+  document.body.classList.toggle('on-dark', slides[i].classList.contains('dark'));
+  history.replaceState(null, '', '#' + (i + 1));
+  countUp(slides[i]);
+  if (slides[i].querySelector('.meter, .bars')) animateResults();
+  if (i >= demoIdx - 1) loadSite();
+  if (i === demoIdx) { setTimeout(() => { if (cur === demoIdx) dock(true); }, reduce ? 0 : 700); }
+  else if (liveMode === 'dock') hideLive();
+}
+
+/* ---------- live site layer ---------- */
+const live = document.getElementById('live');
+const frame = document.getElementById('site');
+let liveMode = 'off', loaded = false, originEl = null;
+
+function loadSite(){ if (!loaded) { loaded = true; frame.src = SITE; } }
+function setHash(h){ loadSite(); const u = SITE + (h ? '#' + h : ''); if (frame.src !== u) frame.src = u; }
+
+function rectStyle(r, opacity){
+  const s = r.width / innerWidth;
+  live.style.width = innerWidth + 'px';
+  live.style.height = (r.height / s) + 'px';
+  live.style.transform = 'translate(' + r.left + 'px,' + r.top + 'px) scale(' + s + ')';
+  live.style.borderRadius = (14 / s) + 'px';
+  live.style.opacity = opacity;
+}
+function dock(anim){
+  const r = document.getElementById('screen').getBoundingClientRect();
+  live.classList.toggle('anim', !!anim && liveMode === 'full');
+  if (liveMode !== 'full') live.classList.remove('anim');
+  rectStyle(r, 1);
+  live.classList.add('show');
+  liveMode = 'dock';
+  originEl = null;
+}
+function hideLive(){
+  live.classList.remove('show', 'anim');
+  liveMode = 'off';
+}
+function openFull(fromEl){
+  loadSite();
+  originEl = fromEl || null;
+  const r = (fromEl || document.getElementById('screen')).getBoundingClientRect();
+  live.classList.remove('anim');
+  rectStyle(r, fromEl ? 0 : 1);
+  live.classList.add('show');
+  void live.offsetWidth;
+  live.classList.add('anim');
+  live.style.height = innerHeight + 'px';
+  live.style.transform = 'translate(0,0) scale(1)';
+  live.style.borderRadius = '0px';
+  live.style.opacity = 1;
+  liveMode = 'full';
+  document.body.classList.add('full');
+}
+function closeFull(instant){
+  document.body.classList.remove('full');
+  if (instant) { hideLive(); return; }
+  if (cur === demoIdx) {
+    const r = document.getElementById('screen').getBoundingClientRect();
+    live.classList.add('anim');
+    rectStyle(r, 1);
+    liveMode = 'dock';
+  } else {
+    const el = originEl && originEl.isConnected ? originEl : null;
+    live.classList.add('anim');
+    if (el) rectStyle(el.getBoundingClientRect(), 0); else live.style.opacity = 0;
+    liveMode = 'closing';
+    setTimeout(() => { if (liveMode === 'closing') hideLive(); }, reduce ? 200 : 750);
+  }
+}
+
+document.querySelectorAll('#sDemo .tabs button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#sDemo .tabs button').forEach(x => x.setAttribute('aria-checked', x === b));
+  setHash(b.dataset.h === 'home' ? '' : b.dataset.h);
+});
+document.getElementById('goFull').onclick = () => openFull(null);
+document.getElementById('goFull2').onclick = () => openFull(null);
+document.querySelectorAll('.act').forEach(a => a.onclick = () => { setHash(a.dataset.h); openFull(a); });
+document.querySelectorAll('[data-m]').forEach(b => b.onclick = () => { loaded = true; frame.src = SITE + b.dataset.m; openFull(b); });
+document.getElementById('endLive').onclick = e => { setHash(''); openFull(e.currentTarget); };
+document.getElementById('back').onclick = () => closeFull(false);
+
+/* ---------- results ---------- */
+function animateResults(){
+  document.querySelectorAll('.meter i, .bars i').forEach(i => { i.style.width = '0'; });
+  setTimeout(() => document.querySelectorAll('.meter i, .bars i').forEach(i => { i.style.width = i.dataset.w + '%'; }), 500);
+}
+
+/* ---------- input ---------- */
+document.getElementById('prev').onclick = () => go(cur - 1);
+document.getElementById('next').onclick = () => go(cur + 1);
+addEventListener('keydown', e => {
+  if (e.key === 'Escape' && liveMode === 'full') { closeFull(false); return; }
+  if (liveMode === 'full') return;
+  if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); go(cur + 1); }
+  if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); go(cur - 1); }
+  if (e.key === 'Home') go(0);
+  if (e.key === 'End') go(N - 1);
+  if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); }
+});
+let tx = null, ty = null;
+addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+addEventListener('touchend', e => {
+  if (tx === null || liveMode === 'full') return;
+  const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) go(cur + (dx < 0 ? 1 : -1));
+  tx = null;
+}, { passive: true });
+addEventListener('resize', () => { fit(); if (liveMode === 'full') { live.style.width = innerWidth + 'px'; live.style.height = innerHeight + 'px'; } });
+
+fit();
+const start = Math.max(0, Math.min(N - 1, (parseInt(location.hash.slice(1), 10) || 1) - 1));
+go(start);
+</script>
+</body>
+</html>
