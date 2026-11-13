@@ -304,9 +304,13 @@ body.full #bar{visibility:hidden}
 .segs div{border-radius:16px;padding:20px 22px}
 .segs h3{font-size:24px}
 .segs p{font-size:16px;line-height:1.4;color:var(--ink-2);margin-top:6px}
-.scale{display:flex;gap:10px;margin-top:16px}
-.scale span{flex:1;border:1.5px solid var(--ink);border-radius:12px;padding:12px 14px;font-weight:600;font-size:17px;text-align:center}
-.scale span.y{background:var(--accent);border-color:var(--accent);color:#fff}
+.scorehd{display:block;margin-top:22px}
+.scale{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}
+.scale div{border:1.5px solid var(--ink);border-radius:14px;padding:14px 16px}
+.scale b{display:block;font-size:19px}
+.scale span{display:block;font-size:16px;line-height:1.4;margin-top:6px;color:var(--ink-2)}
+.scale div.y{background:var(--accent);border-color:var(--accent);color:#fff}
+.scale div.y span{color:#fff}
 
 /* results */
 .stat{background:var(--surface);border-radius:24px;padding:24px 28px;box-shadow:var(--shadow)}
@@ -475,7 +479,7 @@ body.full #bar{visibility:hidden}
   <div class="head"><span class="label" data-a>Part 2 · The problem</span></div>
   <p class="prob" data-a>We help boys in grades 3 to 8 who struggle with <mark>a lack of guidance</mark> by providing a tailored curriculum for basic life skills.</p>
   <div class="sva">
-    <div data-a><span class="label green">Who we believe has the job</span><p><b>A counselor, teacher, youth pastor or coach</b> who works with boys in grades 3 to 8, mostly in lower-income communities, whose parents are stretched thin.</p></div>
+    <div data-a><span class="label green">Who has this job to do</span><p><b>A counselor, teacher, youth pastor or coach</b> who works with boys in grades 3 to 8, mostly in lower-income communities, whose parents are stretched thin.</p></div>
     <div class="job" data-a><span class="label green">The job to be done</span><p>“Help my boys handle everyday life on their own, without building a curriculum from scratch or finding hours I don’t have.”</p></div>
   </div>
 </section>
@@ -500,8 +504,8 @@ body.full #bar{visibility:hidden}
     <div class="rings" aria-hidden="true"><div class="r1" style="--i:0">TAM</div><div class="r2" style="--i:1">SAM</div><div class="r3" style="--i:2">SOM</div></div>
     <div>
       <div class="mrows">
-        <div class="mrow" data-a><span class="k">TAM</span><div><h3><span data-count="67512">67,512</span> schools</h3><p>U.S. public elementary and middle schools</p></div><div class="usd">$13.5M<small>a year</small></div></div>
-        <div class="mrow" data-a><span class="k">SAM</span><div><h3><span data-count="6412">6,412</span> schools</h3><p>Texas public elementary and middle schools</p></div><div class="usd">$1.3M<small>a year</small></div></div>
+        <div class="mrow" data-a><span class="k">TAM</span><div><h3><span data-count="67512">67,512</span> schools</h3><p>Everyone who could buy: U.S. public elementary and middle schools</p></div><div class="usd">$13.5M<small>a year</small></div></div>
+        <div class="mrow" data-a><span class="k">SAM</span><div><h3><span data-count="6412">6,412</span> schools</h3><p>Who we can serve: Texas public elementary and middle schools</p></div><div class="usd">$1.3M<small>a year</small></div></div>
         <div class="mrow" data-a><span class="k">SOM</span><div><h3>10 schools</h3><p>Our year-one goal: Waco-area schools we can drive to</p></div><div class="usd">$2,999<small>a year</small></div></div>
       </div>
       <p class="src" data-a>Dollar math: one $200 workshop per school per year. SOM adds one teacher per school on the $9.99 plan for a 10-month school year ($99.90). Source: NCES Common Core of Data, 2023 to 2024, regular public schools by level.</p>
@@ -517,7 +521,7 @@ body.full #bar{visibility:hidden}
     <div class="line"></div>
     <div class="stage-c" data-a><div class="card"><span class="label">Part 1 idea</span><h3>A curriculum for staff</h3><div class="price">$250 to $400</div><p>Per school, per year. Staff teach it on their own.</p></div></div>
     <div class="stage-c" data-a><div class="card"><span class="label">What we tested</span><h3>In-person workshops</h3><div class="price">$350 <small>50 min</small></div><div class="price" style="margin-top:8px">$500 <small>90 min</small></div><p>Up to 30 students. Supplies included.</p></div></div>
-    <div class="stage-c now" data-a><div class="card"><span class="label">Where we’re going</span><h3>Lower prices plus a monthly plan</h3><div class="price">$9.99 <small>a month, per teacher</small></div><div class="price" style="margin-top:8px">$19.99 <small>team of three</small></div><p>Workshops drop to $200 and $350. Online activities and printable guides every month.</p></div></div>
+    <div class="stage-c now" data-a><div class="card"><span class="label">Where we’re going</span><h3>Lower prices plus a monthly plan</h3><div class="price">$9.99 <small>a month, per teacher</small></div><div class="price" style="margin-top:8px">$19.99 <small>team of three</small></div><p>Workshops drop to $200 and $300. Online activities and printable guides every month.</p></div></div>
   </div>
   <div class="fee" data-a style="margin-top:40px"><span>A $200 workshop costs us about $60 in supplies, gas and card fees, so we keep about <b>$140</b>.</span><span>Stripe takes 2.9% plus 30¢, so we keep <b>$9.40</b> of every $9.99.</span></div>
 </section>
@@ -563,7 +567,7 @@ body.full #bar{visibility:hidden}
   <div class="tests">
     <div class="tc" data-a><span class="n">1</span><h3>Website smoke test</h3><span class="who">Marco</span><p class="q">Will people who land on the site join the interest list?</p><div class="pass"><span class="label">Pass if</span>10% or more of visitors sign up, and at least 5 come from a school or youth group.</div></div>
     <div class="tc" data-a><span class="n">2</span><h3>Flyer with a QR code</h3><span class="who">Dane</span><p class="q">Will counselors, admins and youth leaders for grades 3 to 8 scan and sign up at $350 or $500?</p><div class="pass"><span class="label">Pass if</span>Scans turn into sign-ups from the people the flyer was handed to.</div></div>
-    <div class="tc" data-a><span class="n">3</span><h3>Gatekeeper conversations</h3><span class="who">Jewell</span><p class="q">Who feels the pain most: schools, churches, or social and athletic groups?</p><div class="pass"><span class="label">Pass if</span>Schools get the most strong yes answers, as we expected.</div></div>
+    <div class="tc" data-a><span class="n">3</span><h3>Talks with decision makers</h3><span class="who">Jewell</span><p class="q">Who feels the pain most: schools, churches, or social and athletic groups?</p><div class="pass"><span class="label">Pass if</span>Schools say yes to our ask more often than churches or groups do.</div></div>
   </div>
 </section>
 
@@ -577,7 +581,7 @@ body.full #bar{visibility:hidden}
       <div class="tabs" role="radiogroup" aria-label="Site page" data-a>
         <button role="radio" aria-checked="true" data-h="home">Home</button>
         <button role="radio" aria-checked="false" data-h="activities">Free activities</button>
-        <button role="radio" aria-checked="false" data-h="workshops">Workshops <span>$200 · $350</span></button>
+        <button role="radio" aria-checked="false" data-h="workshops">Workshops <span>$200 · $300</span></button>
         <button role="radio" aria-checked="false" data-h="story">Our story</button>
       </div>
       <button class="btn solid" id="goFull" data-a style="margin-top:auto;align-self:flex-start"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Full screen</button>
@@ -611,18 +615,19 @@ body.full #bar{visibility:hidden}
 <!-- 15 Flyer + conversations -->
 <section class="slide" data-label="MVP 2 and 3">
   <div class="fs">
-    <img class="flyer" src="flyer.png" alt="The Own Two Feet flyer: planned workshops for grades 3 to 8, eight topics, $200 and $350 prices, and a QR code to join the interest list">
+    <img class="flyer" src="flyer.png" alt="The Own Two Feet flyer: planned workshops for grades 3 to 8, eight topics, $200 and $300 prices, monthly plans from $9.99, and a QR code to join the interest list">
     <div>
       <span class="label" data-a>Part 3 · MVP 2 and MVP 3</span>
-      <h2 data-a style="margin-top:16px">A flyer in hand. <em style="font-style:normal;color:var(--accent)">A real conversation.</em></h2>
-      <div class="block" data-a><span class="label green">MVP 2 · Dane · Flyer</span><p>Handed to counselors, admins and youth leaders. Real prices on the page, and one QR code to the interest list.</p></div>
-      <div class="block" data-a><span class="label green">MVP 3 · Jewell · Conversation script</span><p>The same questions with gatekeepers in three groups, scored the same way every time.</p></div>
+      <h2 data-a style="margin-top:16px">Two more tests: <em style="font-style:normal;color:var(--accent)">a flyer and a conversation.</em></h2>
+      <div class="block" data-a><span class="label green">MVP 2 · The flyer · Dane</span><p>Made for counselors, school staff and youth leaders. It shows our real prices and a QR code to the interest list. We watched for scans that turned into sign-ups.</p></div>
+      <div class="block" data-a><span class="label green">MVP 3 · The conversation · Jewell</span><p>Talks with the people who choose programs in three kinds of groups. Same questions every time, and every talk ended with the same ask, so the groups could be compared.</p></div>
       <div class="segs">
         <div style="background:var(--sage)" data-a><h3>Schools</h3><p>Counselors, teachers, admins</p></div>
         <div style="background:var(--mist)" data-a><h3>Churches</h3><p>Youth pastors and leaders</p></div>
         <div style="background:var(--sand)" data-a><h3>Groups</h3><p>Social and athletic programs</p></div>
       </div>
-      <div class="scale" data-a><span class="y">Strong yes</span><span>Medium yes</span><span>No</span></div>
+      <span class="label scorehd" data-a>How we scored each talk</span>
+      <div class="scale" data-a><div class="y"><b>Strong yes</b><span>Fills out our pilot form to get a free sample lesson</span></div><div><b>Medium yes</b><span>Introduces us to the person who approves programs or budget</span></div><div><b>No</b><span>Says no, or “I’ll think about it” and does nothing</span></div></div>
     </div>
   </div>
 </section>
@@ -667,20 +672,20 @@ body.full #bar{visibility:hidden}
 <!-- 17 Other results -->
 <section class="slide" data-label="Conversations and sign-ups">
   <div class="head"><span class="label" data-a>Part 4 · What people said, and what they did</span></div>
-  <h2 class="title" data-a>Almost everyone agreed.<br><em>Nine signed up.</em></h2>
+  <h2 class="title" data-a>Almost everyone agreed.<br><em>Fourteen signed up.</em></h2>
   <div class="duo">
     <div class="dc said" data-a>
-      <span class="label">In 15 conversations</span>
+      <span class="label">In our 15 Part 1 interviews</span>
       <div class="big"><span data-count="14">14</span><small> of 15</small></div>
       <p class="sub">saw the gap we described.</p>
       <div class="foot"><q>Schools, churches and foundations pay, not the kids.</q><small>Steven S., one of our interviews</small></div>
     </div>
     <div class="dc did" data-a>
       <span class="label">Real sign-ups</span>
-      <div class="big"><span data-count="9">9</span></div>
-      <p class="sub">Only 3 came from schools or youth groups.</p>
-      <div class="meter"><i data-w="48"></i><b style="left:80%"></b><em style="left:80%">Goal 5</em></div>
-      <div class="foot"><p>5 came from parents and families, a buyer we hadn’t planned for. One came in before the form was set up.</p></div>
+      <div class="big"><span data-count="14">14</span></div>
+      <p class="sub">5 came from schools or youth groups, right at our goal.</p>
+      <div class="meter"><i data-w="80"></i><b style="left:80%"></b><em style="left:80%">Goal 5</em></div>
+      <div class="foot"><p>4 came from parents and families, a buyer we hadn’t planned for. 4 asked for workshops for their students, 6 for family days and 6 to volunteer.</p></div>
     </div>
   </div>
   <p class="flynote" data-a><b>The flyer:</b> no visit came in tagged to it, so its scans are mixed in with other visits. We can’t prove it worked.</p>
@@ -698,13 +703,13 @@ body.full #bar{visibility:hidden}
     </ul></div>
     <div class="lc no" data-a><span class="label" style="color:var(--bad)">Not proven yet</span><h3>Paying for it</h3><ul>
       <li>9 real sign-ups from 110 visits is 8.2%, under our 10% goal.<small>GoatCounter and Formspree</small></li>
-      <li>That a school will pay $200 to $350 a session. Nothing is booking yet, and the site says so.</li>
+      <li>That a school will pay $200 to $300 a session. Nothing is booking yet, and the site says so.</li>
       <li>How often a school would bring us back in a year.</li>
     </ul></div>
     <div class="lc ch" data-a><span class="label">What changed our plan</span><h3>Our own limits</h3><ul>
       <li>Our team can’t be in schools every week. Workshops alone don’t scale with a team of three college students.</li>
       <li>Some kids already have a dad, YouTube or ChatGPT to ask. The in-person part has to earn its price.<small>Samuel J.</small></li>
-      <li>Asked what fits best, no one who signed up picked a live workshop. 6 of 8 picked monthly online, printables or a kit.<small>Formspree</small></li>
+      <li>Asked what fits best, only 2 of 14 picked a live workshop. 9 picked monthly online, printables or a kit.<small>Formspree</small></li>
     </ul></div>
   </div>
 </section>
@@ -732,7 +737,7 @@ body.full #bar{visibility:hidden}
   <h2 class="title" data-a style="margin-bottom:34px">In person when it counts.<br><em>In class every week.</em></h2>
   <div class="hyb">
     <div class="hc keep" data-a><span class="label">We keep</span><h3>In-person workshops</h3>
-      <div class="prices"><div class="price">$200 <small>50 min</small></div><div class="price">$350 <small>90 min</small></div></div>
+      <div class="prices"><div class="price">$200 <small>50 min</small></div><div class="price">$300 <small>90 min</small></div></div>
       <ul><li>Up to 30 students, supplies included</li><li>Real tools, a mentor in the room</li><li>The kickoff that gets a class excited</li></ul>
       <p class="foot">Down from $350 and $500 after visitors told us it cost too much.</p></div>
     <div class="hc new" data-a><span class="label">We add</span><h3>Monthly online plan</h3>
@@ -747,7 +752,7 @@ body.full #bar{visibility:hidden}
   <svg class="mark" viewBox="0 0 220 220" aria-hidden="true" data-a="pop"><defs><path id="bT" d="M30 110a80 80 0 0 1 160 0"/><path id="bB" d="M24 110a86 86 0 0 0 172 0"/></defs><circle cx="110" cy="110" r="106" fill="#D9E6D8"/><circle cx="110" cy="110" r="64" fill="#FFFFFF"/><text font-family="Geist, system-ui, sans-serif" font-size="17" font-weight="600" letter-spacing="5" fill="#16211C"><textPath href="#bT" startOffset="50%" text-anchor="middle">OWN TWO FEET</textPath></text><text font-family="Geist, system-ui, sans-serif" font-size="13" font-weight="500" letter-spacing="4" fill="#46504A"><textPath href="#bB" startOffset="50%" text-anchor="middle">LIFE SKILLS · HANDS ON</textPath></text><circle cx="40" cy="110" r="3" fill="#2F6450"/><circle cx="180" cy="110" r="3" fill="#2F6450"/><g transform="translate(70 64) scale(.82)"><g transform="translate(40 20) scale(-1 1)"><circle cx="24" cy="7" r="6" fill="#16211C"/><circle cx="33" cy="11.5" r="4" fill="#16211C"/><circle cx="38.5" cy="18" r="3.3" fill="#16211C"/><circle cx="41" cy="25" r="2.8" fill="#16211C"/><path d="M21 2C33 3 38 15 37 30C36 43 31 51 30 61C29 71 32 79 30 89C28 98 13 98 11 89C9 79 13 71 11 61C9 50 3 41 4 28C5 13 10 1 21 2Z" transform="translate(1 18) scale(.86)" fill="#16211C"/></g><g transform="translate(52 0)"><circle cx="24" cy="7" r="6" fill="#2F6450"/><circle cx="33" cy="11.5" r="4" fill="#2F6450"/><circle cx="38.5" cy="18" r="3.3" fill="#2F6450"/><circle cx="41" cy="25" r="2.8" fill="#2F6450"/><path d="M21 2C33 3 38 15 37 30C36 43 31 51 30 61C29 71 32 79 30 89C28 98 13 98 11 89C9 79 13 71 11 61C9 50 3 41 4 28C5 13 10 1 21 2Z" transform="translate(1 18) scale(.86)" fill="#2F6450"/></g></g></svg>
   <h2 class="big" data-a style="font-size:110px">Thank you.</h2>
   <div class="next">
-    <div data-a><span class="label">Next 1</span><p>Build monthly online activities first. It was the top “best fit” answer.</p></div>
+    <div data-a><span class="label">Next 1</span><p>Build monthly online activities first. Sign-ups picked it most when we asked what fits them best.</p></div>
     <div data-a><span class="label">Next 2</span><p>Pilot the monthly plan with teachers already on our list.</p></div>
     <div data-a><span class="label">Next 3</span><p>Book our first Waco-area workshops and turn on payments.</p></div>
   </div>
