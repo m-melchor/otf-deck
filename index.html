@@ -343,6 +343,11 @@ body.full #bar{visibility:hidden}
 .dc .foot small{display:block;font-size:16px;color:var(--ink-2);margin-top:8px}
 .dc .foot p{font-size:20px;line-height:1.4}
 .flynote{font-size:20px;margin-top:22px}
+.dc .bars{margin-top:24px}
+.dc .bars.tall{gap:34px;margin-top:40px}
+.bars.tall .b{grid-template-columns:240px 1fr 60px;font-size:26px}
+.bars.tall .t{height:24px;border-radius:12px}
+.bars.tall .t i{border-radius:12px}
 .take{font-family:var(--serif);font-size:30px;margin-top:18px}
 .bars{display:flex;flex-direction:column;gap:12px;margin-top:14px}
 .bars .b{display:grid;grid-template-columns:220px 1fr 50px;gap:14px;align-items:center;font-size:18px}
@@ -488,7 +493,7 @@ body.full #bar{visibility:hidden}
   </div>
 </section>
 
-<!-- 6 Customer chain -->
+<!-- 5 Customer chain -->
 <section class="slide" data-label="Who it's for">
   <div class="head"><span class="label" data-a>Part 2 · Who it’s for</span></div>
   <h2 class="title" data-a>Who books it, who runs it,<br><em>and who learns.</em></h2>
@@ -502,7 +507,7 @@ body.full #bar{visibility:hidden}
   <div class="sva one" data-a><div class="job"><span class="label green">The job to be done</span><p>“Help the boys I work with handle everyday life on their own, without building lessons from scratch or finding hours I don’t have.”</p></div></div>
 </section>
 
-<!-- 7 Market -->
+<!-- 6 Market -->
 <section class="slide" data-label="Market size">
   <div class="head"><span class="label" data-a>Part 2 · Market size</span><span class="label green" data-a>Counted in schools</span></div>
   <div class="mkt">
@@ -518,7 +523,7 @@ body.full #bar{visibility:hidden}
   </div>
 </section>
 
-<!-- 8 Revenue -->
+<!-- 7 Revenue -->
 <section class="slide" data-label="Revenue">
   <div class="head"><span class="label" data-a>Part 2 · Revenue stream</span></div>
   <h2 class="title" data-a>How we get paid<br><em>changed as we learned.</em></h2>
@@ -531,7 +536,7 @@ body.full #bar{visibility:hidden}
   <div class="fee" data-a style="margin-top:40px"><span>A $200 workshop costs us about $60 in supplies, gas and card fees, so we keep about <b>$140</b>.</span><span>Stripe takes 2.9% plus 30¢, so we keep <b>$9.40</b> of every $9.99.</span></div>
 </section>
 
-<!-- 9 Partners -->
+<!-- 8 Partners -->
 <section class="slide" data-label="Key partners">
   <div class="head"><span class="label" data-a>Part 2 · Key partnerships</span></div>
   <h2 class="title" data-a>We can’t do this <em>alone.</em></h2>
@@ -544,7 +549,7 @@ body.full #bar{visibility:hidden}
   <div class="runs" data-a><span class="label">How it runs today</span><b>GitHub Pages</b> hosts the site · <b>Formspree</b> collects sign-ups · <b>GoatCounter</b> counts visits · <b>Stripe</b> will take payments</div>
 </section>
 
-<!-- 10 Competition -->
+<!-- 9 Competition -->
 <section class="slide" data-label="Competition">
   <div class="head"><span class="label" data-a>Part 2 · Competition</span></div>
   <h2 class="title" data-a>Most programs teach feelings. <em>We teach the tasks.</em></h2>
@@ -565,7 +570,7 @@ body.full #bar{visibility:hidden}
   </div>
 </section>
 
-<!-- 11 What we set out to test -->
+<!-- 10 What we set out to test -->
 <section class="slide" data-label="What we tested">
   <div class="head"><span class="label" data-a>Part 3 · What we set out to test</span></div>
   <h2 class="title" data-a style="margin-bottom:34px">Three tests, one question:<br><em>will they sign up?</em></h2>
@@ -576,7 +581,7 @@ body.full #bar{visibility:hidden}
   </div>
 </section>
 
-<!-- 12 Website live -->
+<!-- 11 Website live -->
 <section class="slide" data-label="MVP 1 · The website" id="sDemo">
   <div class="demo">
     <div class="side">
@@ -598,7 +603,7 @@ body.full #bar{visibility:hidden}
   </div>
 </section>
 
-<!-- 13 Activities -->
+<!-- 12 Activities -->
 <section class="slide" data-label="Free activities">
   <div class="head"><span class="label" data-a>Part 3 · MVP 1 · Free activities</span><span class="label green" data-a>Tap one to play it live</span></div>
   <h2 class="title" data-a style="margin-bottom:30px">Five activities anyone can try, <em>no sign-up.</em></h2>
@@ -617,7 +622,7 @@ body.full #bar{visibility:hidden}
   </div>
 </section>
 
-<!-- 15 Flyer + conversations -->
+<!-- 13 Flyer + conversations -->
 <section class="slide" data-label="MVP 2 and 3">
   <div class="fs">
     <img class="flyer" src="flyer.png" alt="The Own Two Feet flyer: planned workshops for grades 3 to 8, eight topics, $200 and $300 prices, monthly plans from $9.99, and a QR code to join the interest list">
@@ -625,19 +630,19 @@ body.full #bar{visibility:hidden}
       <span class="label" data-a>Part 3 · MVP 2 and MVP 3</span>
       <h2 data-a style="margin-top:16px">Two more tests: <em style="font-style:normal;color:var(--accent)">a flyer and a conversation.</em></h2>
       <div class="block" data-a><span class="label green">MVP 2 · The flyer · Dane</span><p>Made for counselors, school staff and youth leaders. It shows our real prices and a QR code to the interest list. We watched for scans that turned into sign-ups.</p></div>
-      <div class="block" data-a><span class="label green">MVP 3 · The conversation · Jewell</span><p>Talks with the people who choose programs in three kinds of groups. Same questions every time, and every talk ended with the same ask, so the groups could be compared.</p></div>
+      <div class="block" data-a><span class="label green">MVP 3 · The conversation · Jewell</span><p>Twelve talks with the people who choose programs, four in each kind of group. Every talk showed the same offer sheet and ended with the same ask, so the groups could be compared.</p></div>
       <div class="segs">
         <div style="background:var(--sage)" data-a><h3>Schools</h3><p>Counselors, teachers, admins</p></div>
         <div style="background:var(--mist)" data-a><h3>Churches</h3><p>Youth pastors and leaders</p></div>
         <div style="background:var(--sand)" data-a><h3>Groups</h3><p>Social and athletic programs</p></div>
       </div>
       <span class="label scorehd" data-a>How we scored each talk</span>
-      <div class="scale" data-a><div class="y"><b>Strong yes</b><span>Fills out our pilot form to get a free sample lesson</span></div><div><b>Medium yes</b><span>Introduces us to the person who approves programs or budget</span></div><div><b>No</b><span>Says no, or “I’ll think about it” and does nothing</span></div></div>
+      <div class="scale" data-a><div class="y"><b>Strong yes</b><span>Picks a workshop option and joins our interest list</span></div><div><b>Medium yes</b><span>Likes it, or introduces us to the person who approves programs or budget</span></div><div><b>No</b><span>Says no, or “I’ll think about it” and does nothing</span></div></div>
     </div>
   </div>
 </section>
 
-<!-- 16 Website results (GoatCounter, Oct 18 to Nov 12 2026) -->
+<!-- 14 Website results (GoatCounter, Oct 18 to Nov 12 2026) -->
 <section class="slide" data-label="Website results">
   <div class="head"><span class="label" data-a>Part 4 · MVP 1 results · The website</span><span class="label green" data-a>Since launch</span></div>
   <h2 class="title" data-a>Lots of looking and playing.<br><em>About one in eight signed up.</em></h2>
@@ -671,10 +676,38 @@ body.full #bar{visibility:hidden}
       </div></div>
     </div>
   </div>
-  
+
 </section>
 
-<!-- 17 Other results -->
+<!-- 15 MVP 3 results (Jewell's 12 talks; tested at the old $350/$500 prices) -->
+<section class="slide" data-label="Talk results">
+  <div class="head"><span class="label" data-a>Part 4 · MVP 3 results · The conversation</span><span class="label green" data-a>Supported</span></div>
+  <h2 class="title" data-a>Schools said yes the most.<br><em>Our guess held up.</em></h2>
+  <div class="duo">
+    <div class="dc said" data-a>
+      <span class="label">Said yes, by group</span>
+      <div class="bars tall">
+        <div class="b"><span>Schools</span><span class="t"><i data-w="100"></i></span><span class="c">4/4</span></div>
+        <div class="b"><span>Churches</span><span class="t"><i data-w="75"></i></span><span class="c">3/4</span></div>
+        <div class="b"><span>Social and athletic</span><span class="t"><i data-w="25"></i></span><span class="c">1/4</span></div>
+      </div>
+      <div class="foot"><p>Every school and church felt the problem. Only half of the social and athletic groups did.</p></div>
+    </div>
+    <div class="dc did" data-a>
+      <span class="label">What the yeses picked</span>
+      <div class="big"><span data-count="8">8</span><small> of 12</small></div>
+      <p class="sub">said yes. Two picked a workshop and joined our list on the spot.</p>
+      <div class="bars">
+        <div class="b"><span>50-minute workshop</span><span class="t"><i data-w="75"></i></span><span class="c">6</span></div>
+        <div class="b"><span>90-minute workshop</span><span class="t"><i data-w="12.5"></i></span><span class="c">1</span></div>
+        <div class="b"><span>Series or family day</span><span class="t"><i data-w="12.5"></i></span><span class="c">1</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="flynote" data-a><b>Keep in mind:</b> we showed our old prices, $350 and $500. Twelve talks is a small sample, and a yes means interest, not a booking.</p>
+</section>
+
+<!-- 16 Other results -->
 <section class="slide" data-label="Conversations and sign-ups">
   <div class="head"><span class="label" data-a>Part 4 · What people said, and what they did</span></div>
   <h2 class="title" data-a>Almost everyone agreed.<br><em>Fourteen signed up.</em></h2>
@@ -704,7 +737,7 @@ body.full #bar{visibility:hidden}
     <div class="lc ok" data-a><span class="label">Validated</span><h3>The need is real</h3><ul>
       <li>Boys feel the gap, and many won’t ask a busy parent.<small>Luis V., Jayden S.</small></li>
       <li>Videos alone don’t stick. A real person does.<small>Joseph P.</small></li>
-      <li>People play the free activities: 17 visits opened one.<small>GoatCounter</small></li>
+      <li>Schools want it most: 4 of 4 said yes.<small>Our 12 talks</small></li>
       <li>14 real sign-ups from 110 visits is 12.7%, past our 10% goal.<small>GoatCounter and Formspree</small></li>
     </ul></div>
     <div class="lc no" data-a><span class="label" style="color:var(--bad)">Not proven yet</span><h3>Paying for it</h3><ul>
@@ -715,6 +748,7 @@ body.full #bar{visibility:hidden}
       <li>Our team can’t be in schools every week. Workshops alone don’t scale with a team of three college students.</li>
       <li>Some kids already have a dad, YouTube or ChatGPT to ask. The in-person part has to earn its price.<small>Samuel J.</small></li>
       <li>Asked what fits best, only 2 of 14 picked a live workshop. 9 picked monthly online, printables or a kit.<small>Formspree</small></li>
+      <li>In our talks, 6 of 8 yeses picked the shortest, cheapest workshop.<small>Our 12 talks</small></li>
     </ul></div>
   </div>
 </section>
