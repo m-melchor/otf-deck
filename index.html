@@ -497,10 +497,10 @@ body.full #bar{visibility:hidden}
 <section class="slide" data-label="Who it's for">
   <div class="head"><span class="label" data-a>Part 2 · Who it’s for</span></div>
   <h2 class="title" data-a>Who books it, who runs it,<br><em>and who learns.</em></h2>
-  <div class="chain" style="margin-top:40px">
-    <div class="node" data-a><span class="label">Books it</span><h3>The group</h3><ul class="payers"><li>Elementary and middle schools</li><li>Churches and youth groups</li><li>Social and athletic programs</li><li>Sponsors who cover a group</li></ul><p>Lower-income communities first.</p></div>
+  <div class="chain" style="margin-top:24px">
+    <div class="node" data-a><span class="label">Books it</span><h3>The group</h3><ul class="payers"><li>Elementary and middle schools</li><li>Churches and youth groups</li><li>Social and athletic programs</li><li>Sponsors who cover a group</li><li>Teachers, through the monthly plan</li></ul><p>Lower-income communities first.</p></div>
     <div class="arrow" data-a="fade"><svg viewBox="0 0 46 20"><path d="M2 10h40M34 3l8 7-8 7"/></svg></div>
-    <div class="node" data-a><span class="label">Runs it</span><h3>The adult they trust</h3><p>A counselor, teacher, youth pastor or coach. They pick the topics and keep the practice going after we leave.</p></div>
+    <div class="node" data-a><span class="label">Runs it</span><h3>The adult they trust</h3><p>A counselor, teacher, youth pastor or coach. They pick the topics and keep practice going with new activities each month.</p></div>
     <div class="arrow" data-a="fade"><svg viewBox="0 0 46 20"><path d="M2 10h40M34 3l8 7-8 7"/></svg></div>
     <div class="node k" data-a><span class="label">Learns</span><h3>Boys in grades&nbsp;3&nbsp;to&nbsp;8</h3><p>Hands-on practice with real tools, in small groups, with mentors helping.</p></div>
   </div>
@@ -565,7 +565,7 @@ body.full #bar{visibility:hidden}
   </div>
   <div class="diff">
     <p data-a><b>They hand teachers a binder.</b> We bring the tools and a mentor into the room.</p>
-    <p data-a><b>Lessons stop when class ends.</b> Our free activities keep practice going at home.</p>
+    <p data-a><b>Lessons stop when class ends.</b> Our monthly plan brings new activities, and the free ones work at home.</p>
     <p data-a><b>Built for grades 3 to 8.</b> Short, real tasks: a screwdriver, a budget, a phone call.</p>
   </div>
 </section>
@@ -587,12 +587,13 @@ body.full #bar{visibility:hidden}
     <div class="side">
       <span class="label" data-a>Part 3 · MVP 1</span>
       <h2 data-a>The website, <em style="font-style:normal;color:var(--accent)">live.</em></h2>
-      <p data-a>Our first test: the real site, where groups joined the interest list.</p>
+      <p data-a>Our first test: the real site, in English and Spanish, where groups joined the interest list.</p>
       <div class="tabs" role="radiogroup" aria-label="Site page" data-a>
-        <button role="radio" aria-checked="true" data-h="home">Home</button>
-        <button role="radio" aria-checked="false" data-h="activities">Free activities</button>
-        <button role="radio" aria-checked="false" data-h="workshops">Workshops <span>$200 · $300</span></button>
-        <button role="radio" aria-checked="false" data-h="story">Our story</button>
+        <button role="radio" aria-checked="true" data-h="">Home</button>
+        <button role="radio" aria-checked="false" data-h="activities/">Free activities</button>
+        <button role="radio" aria-checked="false" data-h="workshops/">Workshops <span>$200 · $300</span></button>
+        <button role="radio" aria-checked="false" data-h="monthly-plan/">Monthly plan <span>from $9.99</span></button>
+        <button role="radio" aria-checked="false" data-h="story/">Our story</button>
       </div>
       <button class="btn solid" id="goFull" data-a style="margin-top:auto;align-self:flex-start"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Full screen</button>
     </div>
@@ -608,17 +609,17 @@ body.full #bar{visibility:hidden}
   <div class="head"><span class="label" data-a>Part 3 · MVP 1 · Free activities</span><span class="label green" data-a>Tap one to play it live</span></div>
   <h2 class="title" data-a style="margin-bottom:30px">Five activities anyone can try, <em>no sign-up.</em></h2>
   <div class="acts">
-    <button class="act" data-h="tools" data-a><span class="art" style="background:radial-gradient(110% 80% at 50% 0%,#FBF8F2 0%,#ECE3D3 100%)"><svg viewBox="0 0 520 300" aria-hidden="true"><g transform="translate(40 10)"><use href="#t-hammer" width="90" height="270"/></g><g transform="translate(120 20)"><use href="#t-phillips" width="80" height="250"/></g><g transform="translate(195 10)"><use href="#t-tape" width="100" height="270"/></g><g transform="translate(285 15)"><use href="#t-wrench" width="80" height="260"/></g><g transform="translate(360 20)"><use href="#t-flat" width="80" height="250"/></g><g transform="translate(430 5)"><use href="#t-level" width="80" height="285"/></g></svg></span><span class="meta"><h3>Tool Time</h3><p>Pick the right tool on a 3D bench, then use a tape and a level.</p><span class="play">Play live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></button>
-    <button class="act" data-h="budget" data-a><span class="art" style="background:var(--butter)"><svg viewBox="0 0 300 220" aria-hidden="true"><rect x="40" y="40" width="220" height="140" rx="22" fill="#fff"/><text x="64" y="90" font-family="Geist,system-ui,sans-serif" font-size="13" fill="#8A928D">Left to spend</text><text x="64" y="134" font-family="Young Serif,Georgia,serif" font-size="42" fill="#16211C">$6</text><rect x="64" y="150" width="172" height="10" rx="5" fill="#EEEBE4"/><rect x="64" y="150" width="130" height="10" rx="5" fill="#2F6450"/></svg></span><span class="meta"><h3>Saturday on $25</h3><p>Cover needs, keep a promise, stay on budget when curveballs hit.</p><span class="play">Play live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></button>
-    <button class="act" data-h="scams" data-a><span class="art" style="background:var(--sage)"><svg viewBox="0 0 300 220" aria-hidden="true"><rect x="70" y="24" width="160" height="180" rx="28" fill="#fff"/><rect x="88" y="56" width="110" height="34" rx="16" fill="#F6F4EF"/><rect x="88" y="100" width="124" height="44" rx="16" fill="#F2E2A6"/><rect x="100" y="114" width="70" height="6" rx="3" fill="#16211C" opacity=".5"/><rect x="100" y="126" width="90" height="6" rx="3" fill="#16211C" opacity=".3"/><rect x="88" y="156" width="80" height="26" rx="13" fill="#F6F4EF"/></svg></span><span class="meta"><h3>Scam or Safe?</h3><p>Read six messages and tap the red flags that give a scam away.</p><span class="play">Play live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></button>
-    <button class="act" data-h="call" data-a><span class="art" style="background:var(--mist)"><svg viewBox="0 0 300 220" aria-hidden="true"><rect x="70" y="24" width="160" height="180" rx="28" fill="#fff"/><circle cx="150" cy="70" r="20" fill="#F6F4EF"/><text x="150" y="76" text-anchor="middle" font-family="Geist,system-ui,sans-serif" font-size="15" font-weight="600" fill="#56615B">FC</text><text x="150" y="116" text-anchor="middle" font-family="Geist,system-ui,sans-serif" font-size="15" font-weight="600" fill="#16211C">Fresh Cuts</text><text x="150" y="136" text-anchor="middle" font-family="Geist Mono,monospace" font-size="12" fill="#5F6B64">1:12</text><circle cx="150" cy="172" r="15" fill="#2F6450"/><path d="M143 172h14" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="meta"><h3>Make the Call</h3><p>Call a front desk and move an appointment. Three real scenarios.</p><span class="play">Play live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></button>
-    <button class="act" data-h="laundry" data-a><span class="art" style="background:var(--sand)"><svg viewBox="0 0 300 220" aria-hidden="true"><use href="#l-tshirt" x="18" y="14" width="88" height="88"/><use href="#l-jeans" x="106" y="14" width="88" height="88"/><use href="#l-bath" x="194" y="14" width="88" height="88"/><use href="#l-bk-light" x="20" y="116" width="84" height="66"/><use href="#l-bk-dark" x="108" y="116" width="84" height="66"/><use href="#l-bk-towel" x="196" y="116" width="84" height="66"/></svg></span><span class="meta"><h3>Laundry Sort-Out</h3><p>Sort a pile into darks, lights and towels, then read care labels.</p><span class="play">Play live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></button>
+    <button class="act" data-h="activities/tools/" data-a><span class="art" style="background:radial-gradient(110% 80% at 50% 0%,#FBF8F2 0%,#ECE3D3 100%)"><svg viewBox="0 0 520 300" aria-hidden="true"><g transform="translate(40 10)"><use href="#t-hammer" width="90" height="270"/></g><g transform="translate(120 20)"><use href="#t-phillips" width="80" height="250"/></g><g transform="translate(195 10)"><use href="#t-tape" width="100" height="270"/></g><g transform="translate(285 15)"><use href="#t-wrench" width="80" height="260"/></g><g transform="translate(360 20)"><use href="#t-flat" width="80" height="250"/></g><g transform="translate(430 5)"><use href="#t-level" width="80" height="285"/></g></svg></span><span class="meta"><h3>Tool Time</h3><p>Pick the right tool on a 3D bench, then use a tape and a level.</p><span class="play">Play live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></button>
+    <button class="act" data-h="activities/budget/" data-a><span class="art" style="background:var(--butter)"><svg viewBox="0 0 300 220" aria-hidden="true"><rect x="40" y="40" width="220" height="140" rx="22" fill="#fff"/><text x="64" y="90" font-family="Geist,system-ui,sans-serif" font-size="13" fill="#8A928D">Left to spend</text><text x="64" y="134" font-family="Young Serif,Georgia,serif" font-size="42" fill="#16211C">$6</text><rect x="64" y="150" width="172" height="10" rx="5" fill="#EEEBE4"/><rect x="64" y="150" width="130" height="10" rx="5" fill="#2F6450"/></svg></span><span class="meta"><h3>Saturday on $25</h3><p>Cover needs, keep a promise, stay on budget when curveballs hit.</p><span class="play">Play live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></button>
+    <button class="act" data-h="activities/scams/" data-a><span class="art" style="background:var(--sage)"><svg viewBox="0 0 300 220" aria-hidden="true"><rect x="70" y="24" width="160" height="180" rx="28" fill="#fff"/><rect x="88" y="56" width="110" height="34" rx="16" fill="#F6F4EF"/><rect x="88" y="100" width="124" height="44" rx="16" fill="#F2E2A6"/><rect x="100" y="114" width="70" height="6" rx="3" fill="#16211C" opacity=".5"/><rect x="100" y="126" width="90" height="6" rx="3" fill="#16211C" opacity=".3"/><rect x="88" y="156" width="80" height="26" rx="13" fill="#F6F4EF"/></svg></span><span class="meta"><h3>Scam or Safe?</h3><p>Read six messages and tap the red flags that give a scam away.</p><span class="play">Play live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></button>
+    <button class="act" data-h="activities/call/" data-a><span class="art" style="background:var(--mist)"><svg viewBox="0 0 300 220" aria-hidden="true"><rect x="70" y="24" width="160" height="180" rx="28" fill="#fff"/><circle cx="150" cy="70" r="20" fill="#F6F4EF"/><text x="150" y="76" text-anchor="middle" font-family="Geist,system-ui,sans-serif" font-size="15" font-weight="600" fill="#56615B">FC</text><text x="150" y="116" text-anchor="middle" font-family="Geist,system-ui,sans-serif" font-size="15" font-weight="600" fill="#16211C">Fresh Cuts</text><text x="150" y="136" text-anchor="middle" font-family="Geist Mono,monospace" font-size="12" fill="#5F6B64">1:12</text><circle cx="150" cy="172" r="15" fill="#2F6450"/><path d="M143 172h14" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="meta"><h3>Make the Call</h3><p>Call a front desk and move an appointment. Three real scenarios.</p><span class="play">Play live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></button>
+    <button class="act" data-h="activities/laundry/" data-a><span class="art" style="background:var(--sand)"><svg viewBox="0 0 300 220" aria-hidden="true"><use href="#l-tshirt" x="18" y="14" width="88" height="88"/><use href="#l-jeans" x="106" y="14" width="88" height="88"/><use href="#l-bath" x="194" y="14" width="88" height="88"/><use href="#l-bk-light" x="20" y="116" width="84" height="66"/><use href="#l-bk-dark" x="108" y="116" width="84" height="66"/><use href="#l-bk-towel" x="196" y="116" width="84" height="66"/></svg></span><span class="meta"><h3>Laundry Sort-Out</h3><p>Sort a pile into darks, lights and towels, then read care labels.</p><span class="play">Play live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></button>
   </div>
   <div class="manbtns" data-a><span class="label">Plus 7 free manuals, in English and Spanish</span>
     <button class="btn" data-m="manuals/money.html">Money</button>
     <button class="btn" data-m="manuals/home-tools.html">Home &amp; tools</button>
     <button class="btn" data-m="manuals/tech.html">Tech</button>
-    <button class="btn" data-m="es.html">En español</button>
+    <button class="btn" data-m="es/">En español</button>
   </div>
 </section>
 
@@ -765,7 +766,7 @@ body.full #bar{visibility:hidden}
   <span class="label" data-a style="margin-top:64px;display:block">Why the pivot works</span>
   <div class="because" style="margin-top:18px">
     <p data-a>Teachers can use it every week, with or without us there.</p>
-    <p data-a>The free activities and manuals we built become the paid product.</p>
+    <p data-a>Our free activities and manuals show teachers what the plan brings each month.</p>
     <p data-a>Workshops stay as the big hands-on day that makes it stick.</p>
   </div>
 </section>
@@ -813,7 +814,8 @@ body.full #bar{visibility:hidden}
 <p id="rotate">Turn your phone sideways</p>
 
 <script>
-const SITE = 'https://m-melchor.github.io/owntwofeet/';
+// On this computer the deck shows the local preview of the site, so changes can be checked before they go live.
+const SITE = location.hostname === 'localhost' ? 'http://localhost:5630/owntwofeet/' : 'https://m-melchor.github.io/owntwofeet/';
 const PRINT = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 16'%3E%3Cpath d='M1 8c0-3 2.5-4.6 5.5-4.4 2.4.2 4 .9 6.5.7C16.5 4 19 2 22.5 2 26 2 29 4.6 29 8s-3 6-6.5 6c-3.5 0-6-2-9.5-2.3-2.5-.2-4.1.5-6.5.7C3.5 12.6 1 11 1 8z'/%3E%3C/svg%3E\")";
 document.documentElement.style.setProperty('--print', PRINT);
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -921,7 +923,7 @@ const frame = document.getElementById('site');
 let liveMode = 'off', loaded = false, originEl = null;
 
 function loadSite(){ if (!loaded) { loaded = true; frame.src = SITE; } }
-function setHash(h){ loadSite(); const u = SITE + (h ? '#' + h : ''); if (frame.src !== u) frame.src = u; }
+function setPage(p){ loadSite(); const u = SITE + p; if (frame.src !== u) frame.src = u; }
 
 function rectStyle(r, opacity){
   const s = r.width / innerWidth;
@@ -979,13 +981,13 @@ function closeFull(instant){
 
 document.querySelectorAll('#sDemo .tabs button').forEach(b => b.onclick = () => {
   document.querySelectorAll('#sDemo .tabs button').forEach(x => x.setAttribute('aria-checked', x === b));
-  setHash(b.dataset.h === 'home' ? '' : b.dataset.h);
+  setPage(b.dataset.h);
 });
 document.getElementById('goFull').onclick = () => openFull(null);
 document.getElementById('goFull2').onclick = () => openFull(null);
-document.querySelectorAll('.act').forEach(a => a.onclick = () => { setHash(a.dataset.h); openFull(a); });
+document.querySelectorAll('.act').forEach(a => a.onclick = () => { setPage(a.dataset.h); openFull(a); });
 document.querySelectorAll('[data-m]').forEach(b => b.onclick = () => { loaded = true; frame.src = SITE + b.dataset.m; openFull(b); });
-document.getElementById('endLive').onclick = e => { setHash(''); openFull(e.currentTarget); };
+document.getElementById('endLive').onclick = e => { setPage(''); openFull(e.currentTarget); };
 document.getElementById('back').onclick = () => closeFull(false);
 
 /* ---------- results ---------- */
