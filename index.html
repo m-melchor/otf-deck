@@ -171,38 +171,51 @@ body.on-dark{background:var(--deep)}
 .persona b{font-weight:600}
 
 /* market */
-.mkt{display:grid;grid-template-columns:600px 1fr;gap:70px;align-items:center;flex:1}
-.rings{position:relative;width:600px;height:600px}
-.rings div{position:absolute;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);display:flex;justify-content:center;padding-top:28px;font-family:var(--mono);font-size:15px;letter-spacing:.14em}
-.slide.on .rings div{animation:ring 1s var(--ease) forwards;animation-delay:calc(var(--i) * .35s + .3s)}
-@keyframes ring{to{transform:translate(-50%,-50%) scale(1)}}
-.rings .r1{width:600px;height:600px;background:var(--sage)}
-.rings .r2{width:380px;height:380px;background:var(--accent-soft);border:2px solid var(--accent);padding-top:24px}
-.rings .r3{width:150px;height:150px;background:var(--accent);color:#fff;align-items:center;padding:0}
-.mrows{display:flex;flex-direction:column;gap:20px}
-.mrow{display:grid;grid-template-columns:110px 1fr auto;gap:22px;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:18px}
-.mrow .k{font-family:var(--mono);font-size:18px;letter-spacing:.12em;color:var(--accent)}
-.mrow h3{font-size:46px}
-.mrow p{font-size:19px;color:var(--ink-2);margin-top:6px;line-height:1.4}
-.mrow .usd{font-family:var(--serif);font-size:40px;text-align:right}
-.mrow .usd small{display:block;font-family:var(--sans);font-size:15px;color:var(--ink-2)}
+.mk{display:grid;grid-template-columns:420px 1fr;gap:90px;align-items:center;margin-top:30px}
+.mk-fig svg{display:block;width:420px;height:auto;overflow:visible}
+.mk+.src{margin-top:30px}
+.mk-fig figcaption{font-size:15px;color:var(--ink-2);text-align:center;margin-top:12px}
+.mk-c{transform-box:fill-box;transform-origin:50% 100%}
+.mk-c.c1{fill:var(--sage)}
+.mk-c.c2{fill:var(--surface);stroke:var(--accent);stroke-width:1.5}
+.mk-c.c3{fill:var(--accent)}
+.mk-ring{fill:none;stroke:var(--accent);stroke-width:1.5;transform-box:fill-box;transform-origin:center}
+.mk-lead{stroke:var(--accent);stroke-width:1.5}
+.mk-t{font-family:var(--mono);font-size:15px;letter-spacing:.14em;text-transform:uppercase;text-anchor:middle;fill:var(--ink)}
+.mk-t.g{fill:var(--accent)}
+.slide.on .mk-c{animation:grow 1.1s var(--ease) both}
+.slide.on .mk-c.c1{animation-delay:.25s}.slide.on .mk-c.c2{animation-delay:.6s}.slide.on .mk-c.c3{animation-delay:.95s}
+.slide.on .mk-ring{animation:ping 2.4s var(--ease) 1.3s infinite both}
+@keyframes grow{from{transform:scale(0)}}
+@keyframes ping{0%{transform:scale(.4);opacity:0}25%{opacity:1}100%{transform:scale(1.6);opacity:0}}
+.mk-row{display:grid;grid-template-columns:96px 1fr auto;gap:28px;align-items:baseline;padding:32px 0;border-top:1px solid var(--line)}
+.mk-row:last-child{border-bottom:1px solid var(--line)}
+.mk-row .label{display:flex;align-items:center;gap:10px}
+.mk-row i{width:13px;height:13px;border-radius:50%;flex:none}
+.mk-row i.d1{background:var(--sage)}
+.mk-row i.d2{background:var(--surface);box-shadow:inset 0 0 0 1.5px var(--accent)}
+.mk-row i.d3{background:var(--accent)}
+.mk-row h3{font-size:50px;line-height:1.05}
+.mk-row p{font-size:19px;line-height:1.4;color:var(--ink-2);margin-top:8px}
+.mk-row .usd{font-family:var(--serif);font-size:54px;line-height:1;text-align:right}
+.mk-row .usd small{display:block;font-family:var(--sans);font-size:16px;color:var(--ink-2);margin-top:6px}
+.mk-row.som h3,.mk-row.som .usd{color:var(--accent)}
 .src{font-size:15px;color:var(--ink-2);margin-top:14px;line-height:1.5}
 
 /* revenue */
-.rev{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:20px;position:relative}
-.rev .line{position:absolute;left:4%;right:4%;top:22px;height:2px;background:var(--ink);transform:scaleX(0);transform-origin:left}
-.slide.on .rev .line{transition:transform 1.6s var(--ease) .4s;transform:scaleX(1)}
-.stage-c{position:relative;padding-top:58px}
-.stage-c::before{content:"";position:absolute;left:0;top:12px;width:22px;height:22px;border-radius:50%;background:var(--bg);border:2px solid var(--ink)}
-.stage-c.now::before{background:var(--accent);border-color:var(--accent)}
-.stage-c .card{background:var(--surface);border-radius:var(--r-lg);padding:30px;box-shadow:var(--shadow);height:100%}
-.stage-c.now .card{background:var(--ink);color:#fff}
-.stage-c.now .card .label{color:#fff}
-.stage-c h3{font-size:34px;margin:12px 0 14px}
+.flow{display:flex;flex-direction:column;margin-top:30px}
+.fst{display:grid;grid-template-columns:220px 1fr auto;gap:30px;align-items:center;background:var(--surface);border-radius:var(--r-lg);padding:22px 36px;box-shadow:var(--shadow)}
+.fst h3{font-size:34px}
+.fst.now{background:var(--ink);color:#fff}
+.fst.now .label{color:#fff}
+.fp{display:grid;grid-template-columns:repeat(2,auto);gap:8px 44px;justify-content:end}
+.fst .price{font-size:46px}
+.fwhy{display:grid;grid-template-columns:220px 1fr;gap:30px;align-items:center;padding:10px 36px}
+.fwhy svg{width:24px;height:58px;margin-left:10px;stroke:var(--accent);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.fwhy p{font-size:22px;line-height:1.45}
+.fwhy b{color:var(--accent);font-weight:600}
 .price{font-family:var(--serif);font-size:56px;line-height:1}
 .price small{font-family:var(--sans);font-size:18px;margin-left:6px}
-.stage-c p{font-size:19px;line-height:1.5;margin-top:14px}
-.stage-c:not(.now) p{color:var(--ink-2)}
 .fee{margin-top:auto;font-size:20px;display:flex;gap:30px}
 .fee b{font-weight:600}
 
@@ -289,6 +302,16 @@ body.full #bar{visibility:hidden}
 .fs h2{font-size:64px;margin-bottom:14px}
 .fs .block{margin-top:28px;border-top:1px solid var(--line);padding-top:20px}
 .fs .block p{font-size:24px;line-height:1.45;color:var(--ink-2);margin-top:10px}
+.fr{display:grid;grid-template-columns:330px 1fr;gap:70px;margin-top:34px}
+.fr .flyer{width:330px;margin-top:4px}
+.fr-stat{background:var(--surface);border-radius:var(--r-lg);padding:30px 36px;box-shadow:var(--shadow)}
+.fr-stat b{display:block;font-family:var(--serif);font-weight:400;font-size:84px;line-height:1;color:var(--accent)}
+.fr-stat b small{font-size:36px;color:var(--ink-2)}
+.fr-stat p{font-size:24px;line-height:1.4;margin-top:12px}
+.fr-stat .sub{font-size:19px;color:var(--ink-2);margin-top:14px}
+.fr-three{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:34px}
+.fr-three>div{border-top:1px solid var(--line);padding-top:18px}
+.fr-three p{font-size:20px;line-height:1.45;color:var(--ink-2);margin-top:10px}
 
 /* results */
 .stat{background:var(--surface);border-radius:24px;padding:24px 28px;box-shadow:var(--shadow)}
@@ -308,7 +331,6 @@ body.full #bar{visibility:hidden}
 .web .stat{padding:22px 26px}
 .web .stat .v{font-size:56px}
 .web .bars .b{grid-template-columns:170px 1fr 40px;font-size:20px}
-.flynote{font-size:20px;margin-top:22px}
 .bars{display:flex;flex-direction:column;gap:12px;margin-top:14px}
 .bars .b{display:grid;grid-template-columns:220px 1fr 50px;gap:14px;align-items:center;font-size:18px}
 .bars .t{height:14px;border-radius:7px;background:var(--surface-2);position:relative;overflow:hidden}
@@ -358,6 +380,32 @@ body.full #bar{visibility:hidden}
 .qrow .qc span{font-size:16px}
 .stat .note{font-size:17px;color:var(--ink-2)}
 
+/* MVP 3 setup */
+.mv3p{display:grid;grid-template-columns:1fr 1.1fr 1fr 1fr;gap:20px;flex:1;min-height:0;margin-top:36px}
+.mv3p>div{border-radius:var(--r);padding:26px 26px 24px;display:flex;flex-direction:column;gap:14px}
+.m-guess{background:var(--sage)}
+.m-guess .q{font-family:var(--serif);font-size:28px;line-height:1.25}
+.m-guess p:last-child{font-size:17px;line-height:1.45;color:var(--ink-2);margin-top:auto}
+.m-who,.m-offer{background:var(--surface);box-shadow:var(--shadow)}
+.m-who div,.m-offer div{border-top:1px solid var(--line);padding-top:12px}
+.m-who h3{font-size:22px}
+.m-who p{font-size:16px;line-height:1.4;color:var(--ink-2);margin-top:4px}
+.m-who .foot{font-size:15px;line-height:1.45;color:var(--ink-2);margin-top:auto}
+.m-offer div{display:grid;grid-template-columns:28px 1fr auto;align-items:baseline;gap:8px}
+.m-offer b{font-size:20px;color:var(--accent)}
+.m-offer span{font-size:17px}
+.m-offer em{font-style:normal;font-family:var(--serif);font-size:24px}
+.m-offer div:nth-of-type(3) em{font-family:inherit;font-size:16px;color:var(--ink-2)}
+.m-offer p{font-size:15px;line-height:1.45;color:var(--ink-2);margin-top:auto}
+.mv3p .m-ask{padding:0}
+.scale{display:grid;grid-template-columns:1fr;gap:12px}
+.scale div{border:1.5px solid var(--ink);border-radius:14px;padding:14px 16px}
+.scale b{display:block;font-size:19px}
+.scale span{display:block;font-size:16px;line-height:1.4;margin-top:6px;color:var(--ink-2)}
+.scale div.y{background:var(--accent);border-color:var(--accent);color:#fff}
+.scale div.y span{color:#fff}
+.m-ask p{font-family:var(--serif);font-size:20px;line-height:1.3;margin-top:auto}
+
 /* talk results */
 .mv3{display:grid;grid-template-columns:1fr 520px;gap:48px;margin-top:22px;flex:1;min-height:0}
 .setup{font-size:21px;line-height:1.45;color:var(--ink-2);margin-bottom:22px}
@@ -377,16 +425,16 @@ body.full #bar{visibility:hidden}
 .ins b{font-weight:600}
 
 /* learned */
-.lrn{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;flex:1;min-height:0;margin-top:34px}
+.lrn{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;flex:1;min-height:0;margin-top:34px}
 .lc{position:relative;overflow:hidden;background:var(--surface);box-shadow:var(--shadow);border-radius:var(--r-lg);padding:38px 34px 26px;display:flex;flex-direction:column}
 .lc::before{content:"";position:absolute;left:0;right:0;top:0;height:8px;background:var(--c)}
-.lc.ok{--c:var(--accent)}.lc.no{--c:var(--bad)}.lc.ch{--c:var(--ink)}
+.lc.ok{--c:var(--accent)}.lc.no{--c:var(--bad)}
 .lc .label{color:var(--c)}
-.lc .n{font-family:var(--serif);font-weight:400;font-size:116px;line-height:.95;color:var(--c);margin-top:22px;font-variant-numeric:lining-nums}
-.lc .n small{font-size:42px;color:var(--ink-2)}
-.lc .cap{font-size:24px;line-height:1.35;margin-top:10px}
-.lc ul{list-style:none;margin-top:30px}
-.lc li{font-size:19px;line-height:1.45;padding:14px 0 0;margin-top:14px;border-top:1px solid var(--line);color:var(--ink-2)}
+.lc .n{font-family:var(--serif);font-weight:400;font-size:150px;line-height:.95;color:var(--c);margin-top:24px;font-variant-numeric:lining-nums}
+.lc .n small{font-size:52px;color:var(--ink-2)}
+.lc .cap{font-size:30px;line-height:1.3;margin-top:12px}
+.lc ul{list-style:none;margin-top:48px}
+.lc li{font-size:23px;line-height:1.4;padding:18px 0 0;margin-top:18px;border-top:1px solid var(--line);color:var(--ink-2)}
 .lc li b{color:var(--ink);font-weight:600}
 
 /* decision + hybrid on one slide */
@@ -404,23 +452,34 @@ body.full #bar{visibility:hidden}
 .hyb.dk .foot{font-size:16px}
 
 /* closing */
-.fin{display:grid;grid-template-columns:1fr 600px;gap:64px;flex:1;align-items:stretch}
-.fin .left{display:flex;flex-direction:column}
-.fin .big{font-size:110px;margin-top:18px}
-.steps{list-style:none;margin:30px 0}
-.steps li{display:grid;grid-template-columns:40px 1fr;gap:14px;padding:16px 0;border-top:1px solid var(--line);font-size:21px;line-height:1.4}
-.steps li:last-child{border-bottom:1px solid var(--line)}
-.steps b{font-family:var(--mono);font-size:16px;color:var(--accent);padding-top:3px}
-.fin .btn{margin-top:auto;align-self:flex-start}
-.es{background:var(--accent);color:#fff;border-radius:var(--r-lg);padding:38px 40px;display:flex;flex-direction:column;gap:20px}
-.es .label{color:#fff}
-.es .q{font-family:var(--serif);font-size:36px;line-height:1.22}
-.es p{font-size:21px;line-height:1.45}
-.es small{margin-top:auto;font-size:15px;line-height:1.4}
+.s-end{display:grid;grid-template-columns:minmax(0,1fr) 560px;grid-template-rows:auto auto auto;column-gap:80px;align-content:center}
+.s-end .mark{grid-column:1;width:128px;height:128px;margin-bottom:34px}
+.s-end .big{grid-column:1;font-size:132px;line-height:.92;white-space:nowrap;color:#fff}
+.s-end #endLive{grid-column:1;justify-self:start;margin-top:56px;background:#fff;border-color:#fff;color:var(--ink)}
+.next{grid-column:2;grid-row:1/4;align-self:center;border-left:1px solid rgba(255,255,255,.22);padding-left:56px}
+.next .label{display:block;margin-bottom:6px;color:var(--sage)}
+.next>div{display:grid;grid-template-columns:52px 1fr;gap:14px;align-items:baseline;padding:24px 0;border-bottom:1px solid rgba(255,255,255,.22)}
+.next>div:last-child{border-bottom:0}
+.next b{font-family:var(--serif);font-weight:400;font-size:46px;line-height:1;color:var(--sage)}
+.next p{font-size:23px;line-height:1.45;color:#fff}
+/* why we pivoted */
+.why{display:flex;flex-direction:column;gap:12px;margin-top:26px}
+.wh,.wr{display:grid;grid-template-columns:190px 1fr 56px 1fr;gap:24px;align-items:center}
+.wh{padding:0 32px}
+.wh .label:last-child{grid-column:4}
+.wh .label:first-child{grid-column:1/3}
+.wr{background:var(--surface);border-radius:20px;padding:24px 32px;box-shadow:var(--shadow)}
+.wr b{font-family:var(--serif);font-weight:400;font-size:50px;line-height:1;color:var(--accent);white-space:nowrap}
+.wr p{font-size:20px;line-height:1.4}
+.wr svg{width:40px;height:24px;stroke:var(--accent);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.wr .to{font-weight:600}
+.wr.es{background:var(--sage);box-shadow:none}
+.why small{font-size:14px;color:var(--ink-2);padding:2px 32px 0}
 
 @media (prefers-reduced-motion:reduce){
   .slide,.slide.on{transition:opacity .2s}
   .slide.on [data-a],.slide.on .flyer,.slide.on .s-title-mark{animation:fade .3s both!important}
+  .slide.on .mk-c{animation:none}.slide.on .mk-ring{animation:none;opacity:0}
   .slide.on .walk i{animation:none;opacity:.5}
   .w>span,.slide.on .w>span{animation:none;transform:none}
   #live.anim{transition:opacity .2s}
@@ -470,7 +529,7 @@ body.full #bar{visibility:hidden}
   <div class="head"><span class="label" data-a>Part 1 · The idea</span><span class="label green" data-a>Why us, why now</span></div>
   <div class="origin">
     <div>
-      <h2 class="title" data-a>We know this gap <em>firsthand.</em></h2>
+      <h2 class="title" data-a>Where the idea came from.</h2>
       <p class="lede" data-a>We figured out a lot of everyday skills on our own. Not every kid has someone with the time to show them.</p>
     </div>
     <div class="selftaught" data-a>
@@ -503,42 +562,54 @@ body.full #bar{visibility:hidden}
 <!-- 4 Customer chain -->
 <section class="slide" data-label="Who it's for">
   <div class="head"><span class="label" data-a>Part 2 · Who it’s for</span></div>
-  <h2 class="title" data-a>Who books it, who runs it,<br><em>and who learns.</em></h2>
+  <h2 class="title" data-a>Who it’s for.</h2>
   <div class="chain" style="margin-top:24px">
-    <div class="node" data-a><span class="label">Books it</span><h3>The group</h3><ul class="payers"><li>Elementary and middle schools</li><li>Churches and youth groups</li><li>Social and athletic programs</li><li>Sponsors who cover a group</li><li>Teachers, through the monthly plan</li></ul><p>Lower-income communities first.</p></div>
+    <div class="node" data-a><span class="label">Books it</span><h3>The group</h3><ul class="payers"><li>Elementary and middle schools</li><li>Churches and youth groups</li><li>Social and athletic programs</li><li>Sponsors who cover a group</li><li>Teachers and group leaders, through the monthly plan</li></ul><p>Lower-income communities first.</p></div>
     <div class="arrow" data-a="fade"><svg viewBox="0 0 46 20"><path d="M2 10h40M34 3l8 7-8 7"/></svg></div>
     <div class="node" data-a><span class="label">Runs it</span><h3>The adult they trust</h3><p>A counselor, teacher, youth pastor or coach. They pick the topics and keep practice going with new activities each month.</p></div>
     <div class="arrow" data-a="fade"><svg viewBox="0 0 46 20"><path d="M2 10h40M34 3l8 7-8 7"/></svg></div>
     <div class="node k" data-a><span class="label">Learns</span><h3>Boys in grades&nbsp;3&nbsp;to&nbsp;8</h3><p>Hands-on practice with real tools, in small groups, with mentors helping.</p></div>
   </div>
-  <div class="sva one" data-a><div class="job"><span class="label green">The job to be done</span><p>Teachers and counselors want their students ready for everyday life, but they don’t have time to build the lessons.</p></div></div>
+  <div class="sva one" data-a><div class="job"><span class="label green">The job to be done</span><p>Schools, churches and youth groups want their kids ready for everyday life, but they don’t have time to build the lessons.</p></div></div>
 </section>
 
 <!-- 5 Market -->
 <section class="slide" data-label="Market size">
   <div class="head"><span class="label" data-a>Part 2 · Market size</span><span class="label green" data-a>Counted in schools</span></div>
-  <div class="mkt">
-    <div class="rings" aria-hidden="true"><div class="r1" style="--i:0">TAM</div><div class="r2" style="--i:1">SAM</div><div class="r3" style="--i:2">SOM</div></div>
-    <div>
-      <div class="mrows">
-        <div class="mrow" data-a><span class="k">TAM</span><div><h3><span data-count="67512">67,512</span> schools</h3><p>Everyone who could buy: U.S. public elementary and middle schools</p></div><div class="usd">$13.5M<small>a year</small></div></div>
-        <div class="mrow" data-a><span class="k">SAM</span><div><h3><span data-count="6412">6,412</span> schools</h3><p>Who we can serve: Texas public elementary and middle schools</p></div><div class="usd">$1.3M<small>a year</small></div></div>
-        <div class="mrow" data-a><span class="k">SOM</span><div><h3>10 schools</h3><p>Our year-one goal: Waco-area schools we can drive to</p></div><div class="usd">$2,999<small>a year</small></div></div>
-      </div>
-      <p class="src" data-a>Dollar math: one $200 workshop per school per year. SOM adds one teacher per school on the $9.99 plan for a 10-month school year ($99.90). Source: NCES Common Core of Data, 2023 to 2024, regular public schools by level.</p>
+  <h2 class="title" data-a>How big the market is.</h2>
+  <div class="mk">
+    <figure class="mk-fig" data-a="fade">
+      <svg viewBox="0 0 470 520" aria-label="Three circles drawn to scale: U.S. schools, Texas schools, and 10 Waco-area schools">
+        <circle class="mk-c c1" cx="235" cy="235" r="230"/>
+        <circle class="mk-c c2" cx="235" cy="394" r="71"/>
+        <circle class="mk-ring" cx="235" cy="462.2" r="13"/>
+        <circle class="mk-c c3" cx="235" cy="462.2" r="2.8"/>
+        <text x="235" y="96" class="mk-t">United States</text>
+        <text x="235" y="380" class="mk-t">Texas</text>
+        <path class="mk-lead" d="M235 476v24"/>
+        <text x="235" y="516" class="mk-t g">Waco area</text>
+      </svg>
+      <figcaption>Circles drawn to scale by number of schools.</figcaption>
+    </figure>
+    <div class="mk-rows">
+      <div class="mk-row" data-a style="--d:2"><span class="label"><i class="d1"></i>TAM</span><div><h3><span data-count="67512">67,512</span> schools</h3><p>Everyone who could buy: U.S. public elementary and middle schools</p></div><div class="usd">$13.5M<small>a year</small></div></div>
+      <div class="mk-row" data-a style="--d:4"><span class="label"><i class="d2"></i>SAM</span><div><h3><span data-count="6412">6,412</span> schools</h3><p>Who we can serve: Texas public elementary and middle schools</p></div><div class="usd">$1.3M<small>a year</small></div></div>
+      <div class="mk-row som" data-a style="--d:6"><span class="label green"><i class="d3"></i>SOM</span><div><h3>10 schools</h3><p>Our year-one goal: Waco-area schools we can drive to</p></div><div class="usd">$2,999<small>a year</small></div></div>
     </div>
   </div>
+  <p class="src" data-a>Dollar math: one $200 workshop per school per year. SOM adds one teacher per school on the $9.99 plan for a 10-month school year ($99.90). Source: NCES Common Core of Data, 2023 to 2024, regular public schools by level.</p>
 </section>
 
 <!-- 6 Revenue -->
 <section class="slide" data-label="Revenue">
   <div class="head"><span class="label" data-a>Part 2 · Revenue stream</span></div>
-  <h2 class="title" data-a>How we get paid<br><em>changed as we learned.</em></h2>
-  <div class="rev">
-    <div class="line"></div>
-    <div class="stage-c" data-a><div class="card"><span class="label">Part 1 idea</span><h3>A curriculum for staff</h3><div class="price">$250 to $400</div><p>Per school, per year. Staff teach it on their own.</p></div></div>
-    <div class="stage-c" data-a><div class="card"><span class="label">What we tested</span><h3>In-person workshops</h3><div class="price">$350 <small>50 min</small></div><div class="price" style="margin-top:8px">$500 <small>90 min</small></div><p>Up to 30 students. Supplies included.</p></div></div>
-    <div class="stage-c now" data-a><div class="card"><span class="label">Where we’re going</span><h3>Lower prices plus a monthly plan</h3><div class="price">$9.99 <small>a month, per teacher</small></div><div class="price" style="margin-top:8px">$19.99 <small>team of three</small></div><p>Workshops drop to $200 and $300. Online activities and printable guides every month.</p></div></div>
+  <h2 class="title" data-a>How we get paid.</h2>
+  <div class="flow">
+    <div class="fst" data-a><span class="label">Part 1 idea</span><h3>A curriculum staff teach</h3><div class="fp"><div class="price">$250 to $400 <small>a year, per school</small></div></div></div>
+    <div class="fwhy" data-a><svg viewBox="0 0 24 58"><path d="M12 2v52M4 46l8 8 8-8"/></svg><p><b>Why we changed:</b> our interviews said lessons alone don’t teach it. Kids need hands-on practice with a real person beside them.</p></div>
+    <div class="fst" data-a><span class="label">What we tested</span><h3>In-person workshops</h3><div class="fp"><div class="price">$350 <small>50 min</small></div><div class="price">$500 <small>90 min</small></div></div></div>
+    <div class="fwhy" data-a><svg viewBox="0 0 24 58"><path d="M12 2v52M4 46l8 8 8-8"/></svg><p><b>Why we changed:</b> visitors said it cost too much, and we can’t be in schools every week. 7 of 20 sign-ups picked a monthly online plan.</p></div>
+    <div class="fst now" data-a><span class="label">Where we’re going</span><h3>Workshops plus a monthly plan</h3><div class="fp"><div class="price">$200 <small>50 min</small></div><div class="price">$300 <small>90 min</small></div><div class="price">$9.99 <small>a month</small></div><div class="price">$19.99 <small>team of three</small></div></div></div>
   </div>
   <div class="fee" data-a style="margin-top:40px"><span>A $200 workshop costs us about $60 in supplies, gas and card fees, so we keep about <b>$140</b>.</span><span>Stripe takes 2.9% plus 30¢, so we keep <b>$9.40</b> of every $9.99.</span></div>
 </section>
@@ -546,9 +617,9 @@ body.full #bar{visibility:hidden}
 <!-- 7 Partners -->
 <section class="slide" data-label="Key partners">
   <div class="head"><span class="label" data-a>Part 2 · Key partnerships</span></div>
-  <h2 class="title" data-a>We can’t do this <em>alone.</em></h2>
+  <h2 class="title" data-a>Who we need on our side.</h2>
   <div class="pgrid" style="margin-top:40px">
-    <div class="pc" style="background:var(--sage)" data-a><svg viewBox="0 0 48 48"><path d="M6 20 24 8l18 12"/><path d="M10 18v22h28V18"/><path d="M20 40V28h8v12"/></svg><h3>Schools and counselors</h3><p>Our buyers and hosts. They know which boys need it most.</p></div>
+    <div class="pc" style="background:var(--sage)" data-a><svg viewBox="0 0 48 48"><path d="M6 20 24 8l18 12"/><path d="M10 18v22h28V18"/><path d="M20 40V28h8v12"/></svg><h3>Schools</h3><p>Our first buyers and hosts. Their staff know which boys need it most.</p></div>
     <div class="pc" style="background:var(--mist)" data-a><svg viewBox="0 0 48 48"><path d="M24 4v10M19 9h10"/><path d="M12 22 24 14l12 8v20H12z"/><path d="M21 42v-9h6v9"/></svg><h3>Churches and youth groups</h3><p>Trusted places that already gather boys and families.</p></div>
     <div class="pc" style="background:var(--butter)" data-a><svg viewBox="0 0 48 48"><path d="M8 26h8l8 6h10a4 4 0 0 0 0-8h-6"/><path d="M8 38h26l10-8a3 3 0 0 0-4-4l-6 4"/><path d="M28 8a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/></svg><h3>Foundations and sponsors</h3><p>They can pay for schools that can’t, an idea Steven S. raised in our interviews.</p></div>
     <div class="pc" style="background:var(--peach)" data-a><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="16"/><path d="M8 24h32M24 8c6 5 6 27 0 32M24 8c-6 5-6 27 0 32"/></svg><h3>Community and athletic groups</h3><p>Coaches and leaders who reach boys after school.</p></div>
@@ -559,7 +630,7 @@ body.full #bar{visibility:hidden}
 <!-- 8 Competition -->
 <section class="slide" data-label="Competition">
   <div class="head"><span class="label" data-a>Part 2 · Competition</span></div>
-  <h2 class="title" data-a>Most programs teach behavior. <em>We teach everyday skills.</em></h2>
+  <h2 class="title" data-a>What else is out there.</h2>
   <div class="spec">
     <div class="axis"></div>
     <div class="ends"><span class="label">Feelings and behavior</span><span class="label">Everyday hands-on skills</span></div>
@@ -572,7 +643,7 @@ body.full #bar{visibility:hidden}
   </div>
   <div class="diff">
     <p data-a><b>Most sell schools a curriculum.</b> We come in person with real tools and mentors.</p>
-    <p data-a><b>Practice keeps going.</b> Teachers get new activities every month, and students can try our free ones at home.</p>
+    <p data-a><b>Practice keeps going.</b> Schools and groups get new activities every month, and students can try our free ones at home.</p>
     <p data-a><b>Made for grades 3 to 8.</b> Short, real tasks like using a screwdriver, making a budget or calling to reschedule.</p>
   </div>
 </section>
@@ -580,7 +651,7 @@ body.full #bar{visibility:hidden}
 <!-- 9 What we set out to test -->
 <section class="slide" data-label="What we tested">
   <div class="head"><span class="label" data-a>Part 3 · What we set out to test</span></div>
-  <h2 class="title" data-a style="margin-bottom:34px">Three tests, one question:<br><em>will they sign up?</em></h2>
+  <h2 class="title" data-a style="margin-bottom:34px">What we tested.</h2>
   <div class="tests">
     <div class="tc" data-a><span class="n">1</span><h3>Website smoke test</h3><span class="who">Marco</span><p class="q">Will people who land on the site join the interest list?</p><div class="pass"><span class="label">Pass if</span>10% or more of visitors sign up, and at least 5 come from a school or youth group.</div></div>
     <div class="tc" data-a><span class="n">2</span><h3>Flyer with a QR code</h3><span class="who">Dane</span><p class="q">Will counselors, admins and youth leaders for grades 3 to 8 scan and sign up at $350 or $500?</p><div class="pass"><span class="label">Pass if</span>Scans turn into sign-ups from the people the flyer was handed to.</div></div>
@@ -592,8 +663,8 @@ body.full #bar{visibility:hidden}
 <section class="slide" data-label="MVP 1 · The website" id="sDemo">
   <div class="demo">
     <div class="side">
-      <span class="label" data-a>Part 3 · MVP 1</span>
-      <h2 data-a>The website, <em style="font-style:normal;color:var(--accent)">live.</em></h2>
+      <span class="label" data-a>Part 3 · MVP 1 · Marco</span>
+      <h2 data-a>A website.</h2>
       <p data-a>Our first test: the real site, with free activities, manuals and our interest list.</p>
       <div class="tabs" role="radiogroup" aria-label="Site page" data-a>
         <button role="radio" aria-checked="true" data-h="">Home</button>
@@ -616,8 +687,8 @@ body.full #bar{visibility:hidden}
   <div class="fs">
     <img class="flyer" src="flyer.png" alt="The Own Two Feet flyer: planned workshops for grades 3 to 8, eight topics, $200 and $300 prices, monthly plans from $9.99, and a QR code to join the interest list">
     <div>
-      <span class="label" data-a>Part 3 · MVP 2 · The flyer · Dane</span>
-      <h2 data-a style="margin-top:16px">One page that points <em style="font-style:normal;color:var(--accent)">to the sign-up list.</em></h2>
+      <span class="label" data-a>Part 3 · MVP 2 · Dane</span>
+      <h2 data-a style="margin-top:16px">A flyer.</h2>
       <div class="block" data-a><span class="label green">Who it’s for</span><p>Counselors, school staff and youth leaders, the people who choose programs for a group.</p></div>
       <div class="block" data-a><span class="label green">What it shows</span><p>Grades 3 to 8, eight topics, our workshop prices, the monthly plan and a QR code to the interest list.</p></div>
       <div class="block" data-a><span class="label green">What we watched</span><p>Scans that turned into sign-ups on the website.</p></div>
@@ -625,10 +696,42 @@ body.full #bar{visibility:hidden}
   </div>
 </section>
 
-<!-- 12 MVP 1 results (GoatCounter + Formspree: 163 visits, 20 real sign-ups) -->
+<!-- 12 MVP 3: the talks (Jewell) -->
+<section class="slide" data-label="MVP 3 · The talks">
+  <div class="head"><span class="label" data-a>Part 3 · MVP 3 · Jewell</span><span class="label green" data-a>12 talks</span></div>
+  <h2 class="title" data-a>Talks with decision makers.</h2>
+  <div class="mv3p">
+    <div class="m-guess" data-a>
+      <span class="label">Our guess</span>
+      <p class="q">Schools feel the problem most and are the most likely to book a pilot workshop.</p>
+      <p>It holds if schools say yes more often than churches or groups. If not, we rethink who we sell to.</p>
+    </div>
+    <div class="m-who" data-a>
+      <span class="label">Who Jewell talked to</span>
+      <div><h3>Schools</h3><p>Counselors, assistant principals, mentorship coordinators</p></div>
+      <div><h3>Churches</h3><p>Youth pastors, student ministry directors</p></div>
+      <div><h3>Groups</h3><p>Coaches, athletic directors, youth nonprofit directors</p></div>
+      <p class="foot">Four talks in each group, twelve in all.</p>
+    </div>
+    <div class="m-offer" data-a>
+      <span class="label">The offer sheet</span>
+      <div><b>A</b><span>50-minute workshop</span><em>$350</em></div>
+      <div><b>B</b><span>90-minute workshop</span><em>$500</em></div>
+      <div><b>C</b><span>Series or family day</span><em>Per session</em></div>
+      <p>Every talk used this same sheet, with our prices at the time. Jewell said it was a Baylor class project and took no money.</p>
+    </div>
+    <div class="m-ask" data-a>
+      <span class="label">How we scored each talk</span>
+      <div class="scale"><div class="y"><b>Strong yes</b><span>Picks A, B or C and joins the interest list</span></div><div><b>Medium yes</b><span>Introduces us to the person who approves programs or budget</span></div><div><b>No</b><span>Says no, or “I’ll think about it” and does nothing</span></div></div>
+      <p>Only actions counted. “That sounds great” did not.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 13 MVP 1 results (GoatCounter + Formspree: 163 visits, 20 real sign-ups) -->
 <section class="slide" data-label="Website results">
   <div class="head"><span class="label" data-a>Part 4 · MVP 1 results · The website</span><span class="label green" data-a>Passed</span></div>
-  <h2 class="title" data-a>One in eight visitors signed up.<br><em>Past our 10% goal.</em></h2>
+  <h2 class="title" data-a>Website results.</h2>
   <div class="web" style="margin-top:30px">
     <div class="col">
       <div class="stat" data-a><div class="row"><span class="label">Visits</span><span class="v" data-count="163">163</span></div><p>Mostly on phones, from a text or a QR code</p></div>
@@ -652,13 +755,30 @@ body.full #bar{visibility:hidden}
   </div>
 </section>
 
-<!-- 13 MVP 3 results (Jewell's 12 talks; old $350/$500 prices; no org names) -->
+<!-- 14 MVP 2 results (Dane's flyer: QR went to the plain site link, so scans can't be split from texts) -->
+<section class="slide" data-label="Flyer results">
+  <div class="head"><span class="label" data-a>Part 4 · MVP 2 results · The flyer</span><span class="label" data-a>No clear result</span></div>
+  <h2 class="title" data-a>Flyer results.</h2>
+  <div class="fr">
+    <img class="flyer" src="flyer.png" alt="The Own Two Feet flyer with its QR code">
+    <div>
+      <div class="fr-stat" data-a><b>131<small> of 163</small></b><p>visits came from a text, a QR scan or a typed link.</p><p class="sub">The flyer’s QR code went to the same link we texted, so we can’t tell a scan from a text.</p></div>
+      <div class="fr-three">
+        <div data-a><span class="label green">What we hoped</span><p>School staff and youth group leaders scan the QR code and sign up.</p></div>
+        <div data-a><span class="label green">What we can’t tell</span><p>5 sign-ups came from schools and youth groups. We don’t know if the flyer brought any of them.</p></div>
+        <div data-a><span class="label green">Next time</span><p>Give the flyer its own link, so every scan is counted on its own.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 15 MVP 3 results (Jewell's 12 talks; old $350/$500 prices; no org names) -->
 <section class="slide" data-label="Talk results">
   <div class="head"><span class="label" data-a>Part 4 · MVP 3 results · Talks with decision makers</span><span class="label green" data-a>Passed</span></div>
-  <h2 class="title" data-a>Schools said yes the most.<br><em>Our guess held up.</em></h2>
+  <h2 class="title" data-a>Talk results.</h2>
   <div class="mv3">
     <div>
-      <p class="setup" data-a>Jewell met 12 people who choose programs for kids: 4 at schools, 4 at churches and 4 at sports and community groups. Each saw the same offer, and we only counted what they did.</p>
+      <p class="setup" data-a>4 talks at schools, 4 at churches and 4 at sports and community groups.</p>
       <div class="talks">
         <div class="trow th" data-a><span></span><span class="label">Each square is one talk</span><span class="label">Felt it</span><span class="label">Said yes</span></div>
         <div class="trow" data-a><b>Schools</b><span class="sqs"><i class="s"></i><i class="s"></i><i class="m"></i><i class="m"></i></span><span class="f">4 of 4</span><span class="y">4 of 4</span></div>
@@ -675,13 +795,12 @@ body.full #bar{visibility:hidden}
       <p><b>Price matters.</b> 6 of the 8 yeses picked the shortest, cheapest workshop.</p>
     </div>
   </div>
-  <p class="flynote" data-a><b>Keep in mind:</b> she showed our old prices, $350 and $500. Twelve talks is a small sample, and a yes means interest, not a booking.</p>
 </section>
 
-<!-- 14 Learned -->
+<!-- 16 Learned -->
 <section class="slide" data-label="What we learned">
   <div class="head"><span class="label" data-a>Part 4 · What we validated</span></div>
-  <h2 class="title" data-a>What we proved,<br><em>and what we didn’t.</em></h2>
+  <h2 class="title" data-a>What we learned.</h2>
   <div class="lrn">
     <div class="lc ok" data-a>
       <span class="label">Proved</span>
@@ -698,62 +817,58 @@ body.full #bar{visibility:hidden}
       <p class="cap">schools have booked or paid us.</p>
       <ul>
         <li>How often a school would bring us back in a year.</li>
-        <li>Whether the flyer worked. No visit came in tagged to it.</li>
-      </ul>
-    </div>
-    <div class="lc ch" data-a>
-      <span class="label">Changed our plan</span>
-      <b class="n">5<small> of 20</small></b>
-      <p class="cap">sign-ups picked a live workshop.</p>
-      <ul>
-        <li><b>6 of 8</b> yeses in our talks picked the cheapest workshop.</li>
-        <li>Three college students can’t be in schools every week.</li>
+        <li>Whether the flyer brought sign-ups. Its scans weren’t counted on their own.</li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- 15 Decision and the hybrid -->
+<!-- 17 Decision and the hybrid -->
 <section class="slide dark" data-label="Our decision">
   <div class="head"><span class="label" data-a>Part 5 · Our decision</span></div>
   <h2 class="title" data-a>We’re going to <em>pivot.</em></h2>
   <div class="ipa sm">
     <div data-a><span class="label">Not this</span><h3>Iterate</h3><p>Only tweak the workshops. We’d still have to be in the room every week.</p></div>
-    <div class="pick" data-a><span class="label">Our call</span><h3>Pivot</h3><p>Keep workshops and add a monthly plan teachers run on their own.</p></div>
+    <div class="pick" data-a><span class="label">Our call</span><h3>Pivot</h3><p>Keep workshops and add a monthly plan schools and groups run on their own.</p></div>
     <div data-a><span class="label">Not this</span><h3>Abandon</h3><p>The need is real. 14 of 15 interviews and every school said so.</p></div>
   </div>
   <div class="hyb dk">
     <div class="hc keep" data-a><span class="label">We keep</span><h3>In-person workshops</h3>
       <div class="prices"><div class="price">$200 <small>50 min</small></div><div class="price">$300 <small>90 min</small></div></div>
       <ul><li>Up to 30 students, real tools, a mentor in the room</li></ul>
-      <p class="foot">Down from $350 and $500 after visitors told us it cost too much.</p></div>
+      <p class="foot">Down from $350 and $500.</p></div>
     <div class="hc new" data-a><span class="label">We add</span><h3>A monthly online plan</h3>
-      <div class="prices"><div class="price">$9.99 <small>per teacher</small></div><div class="price">$19.99 <small>team of three</small></div></div>
+      <div class="prices"><div class="price">$9.99 <small>per leader</small></div><div class="price">$19.99 <small>team of three</small></div></div>
       <ul><li>New activities and printable guides every month</li></ul>
-      <p class="foot">For teachers and volunteers with a school ID or a letter from their group. Low-income schools and groups go first.</p></div>
+      <p class="foot">For teachers, volunteers and group leaders with a school ID or a letter from their group. Low-income schools and groups go first.</p></div>
   </div>
 </section>
 
-<!-- 16 Spanish, next steps, thank you -->
-<section class="slide" data-label="Thank you">
-  <div class="fin">
-    <div class="left">
-      <span class="label" data-a>Part 5 · What’s next</span>
-      <h2 class="big" data-a>Thank you.</h2>
-      <ol class="steps">
-        <li data-a><b>1</b><span>Build the monthly activities first. Our sign-ups picked them most.</span></li>
-        <li data-a><b>2</b><span>Try the monthly plan with the teachers already on our list.</span></li>
-        <li data-a><b>3</b><span>Book our first Waco-area workshops, starting with schools, and turn on payments.</span></li>
-      </ol>
-      <button class="btn solid" id="endLive" data-a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Visit Own Two Feet</button>
-    </div>
-    <div class="es" data-a>
-      <span class="label">Why we built the site in Spanish too</span>
-      <p class="q">In Waco ISD, 9 in 10 students come from low-income homes. 6 in 10 are Hispanic, and 1 in 4 is still learning English.</p>
-      <p>Many of the families we want to reach speak Spanish at home. So every page, activity and manual on our site has a Spanish version, and 2 parents have already signed up in Spanish.</p>
-      <small>Source: Texas Tribune, from Texas Education Agency data, 2023 to 2024 school year</small>
-    </div>
+<!-- 18 Why we pivoted, to what, and why Spanish -->
+<section class="slide" data-label="Why we pivoted">
+  <div class="head"><span class="label" data-a>Part 5 · Why we pivoted</span></div>
+  <h2 class="title" data-a>Why we pivoted, <em>and to what.</em></h2>
+  <div class="why">
+    <div class="wh" data-a><span class="label">What we found</span><span class="label">What we changed</span></div>
+    <div class="wr" data-a><b>6 of 8</b><p>yeses in our talks picked the cheapest workshop, and visitors said our prices were too high.</p><svg viewBox="0 0 40 24"><path d="M2 12h34M28 4l8 8-8 8"/></svg><p class="to">We cut workshop prices to $200 and $300.</p></div>
+    <div class="wr" data-a><b>7 of 20</b><p>sign-ups on our website picked a monthly online plan.</p><svg viewBox="0 0 40 24"><path d="M2 12h34M28 4l8 8-8 8"/></svg><p class="to">We added a monthly plan: new activities and printable guides every month.</p></div>
+    <div class="wr" data-a><b>3</b><p>college students run this. We can’t be in schools every week.</p><svg viewBox="0 0 40 24"><path d="M2 12h34M28 4l8 8-8 8"/></svg><p class="to">Teachers and group leaders run the monthly activities, so kids keep practicing between our visits.</p></div>
+    <div class="wr es" data-a><b>9 in 10</b><p>Waco ISD students come from low-income homes. 6 in 10 are Hispanic, and 1 in 4 is still learning English.</p><svg viewBox="0 0 40 24"><path d="M2 12h34M28 4l8 8-8 8"/></svg><p class="to">We built the whole site in Spanish too: every page, activity and manual.</p></div>
+    <small data-a>Waco ISD figures: Texas Tribune, from Texas Education Agency data, 2023 to 2024 school year.</small>
   </div>
+</section>
+
+<!-- 19 Thank you and next steps -->
+<section class="slide dark s-end" data-label="Thank you">
+  <svg class="mark" viewBox="0 0 220 220" aria-hidden="true" data-a="pop"><defs><path id="bT" d="M30 110a80 80 0 0 1 160 0"/><path id="bB" d="M24 110a86 86 0 0 0 172 0"/></defs><circle cx="110" cy="110" r="106" fill="#D9E6D8"/><circle cx="110" cy="110" r="64" fill="#FFFFFF"/><text font-family="Geist, system-ui, sans-serif" font-size="17" font-weight="600" letter-spacing="5" fill="#16211C"><textPath href="#bT" startOffset="50%" text-anchor="middle">OWN TWO FEET</textPath></text><text font-family="Geist, system-ui, sans-serif" font-size="13" font-weight="500" letter-spacing="4" fill="#46504A"><textPath href="#bB" startOffset="50%" text-anchor="middle">LIFE SKILLS · HANDS ON</textPath></text><circle cx="40" cy="110" r="3" fill="#2F6450"/><circle cx="180" cy="110" r="3" fill="#2F6450"/><g transform="translate(70 64) scale(.82)"><g transform="translate(40 20) scale(-1 1)"><circle cx="24" cy="7" r="6" fill="#16211C"/><circle cx="33" cy="11.5" r="4" fill="#16211C"/><circle cx="38.5" cy="18" r="3.3" fill="#16211C"/><circle cx="41" cy="25" r="2.8" fill="#16211C"/><path d="M21 2C33 3 38 15 37 30C36 43 31 51 30 61C29 71 32 79 30 89C28 98 13 98 11 89C9 79 13 71 11 61C9 50 3 41 4 28C5 13 10 1 21 2Z" transform="translate(1 18) scale(.86)" fill="#16211C"/></g><g transform="translate(52 0)"><circle cx="24" cy="7" r="6" fill="#2F6450"/><circle cx="33" cy="11.5" r="4" fill="#2F6450"/><circle cx="38.5" cy="18" r="3.3" fill="#2F6450"/><circle cx="41" cy="25" r="2.8" fill="#2F6450"/><path d="M21 2C33 3 38 15 37 30C36 43 31 51 30 61C29 71 32 79 30 89C28 98 13 98 11 89C9 79 13 71 11 61C9 50 3 41 4 28C5 13 10 1 21 2Z" transform="translate(1 18) scale(.86)" fill="#2F6450"/></g></g></svg>
+  <h2 class="big" data-a>Thank you.</h2>
+  <div class="next">
+    <span class="label green" data-a>What we do next</span>
+    <div data-a><b>1</b><p>Grow our five free activities into the monthly plan, with new ones each month. Our sign-ups picked it most.</p></div>
+    <div data-a><b>2</b><p>Try the monthly plan with the schools and groups already on our list.</p></div>
+    <div data-a><b>3</b><p>Book our first Waco-area workshops, starting with schools, and turn on payments.</p></div>
+  </div>
+  <button class="btn solid" id="endLive" data-a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Visit Own Two Feet</button>
 </section>
 
 </div>
@@ -763,7 +878,7 @@ body.full #bar{visibility:hidden}
 
 <div id="bar">
   <div id="prints" aria-label="Slides"></div>
-  <div class="nav"><span class="num" id="num">1 / 16</span>
+  <div class="nav"><span class="num" id="num">1 / 19</span>
     <button id="prev" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
     <button id="next" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
